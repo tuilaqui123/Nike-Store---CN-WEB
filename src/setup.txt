@@ -1,0 +1,33 @@
+font-family: "Oswald", sans-serif;
+Air Force 1 | Join Forces: Celebrating 40 Years of Force
+
+
+explore nike page//
+user page
+breadcrumd display
+hover navbar
+responsive
+
+redux/ react context
+
+- them dau tick o checkout
+- thong bao khi them vao gio hang, yeu thich
+-kiem tr lai cart (product type name)
+
+*nội dung cần sửa
+- Khách hàng:
+    + Thêm mật khẩu (autheticate) để đăng nhập 
+    + Thêm lịch sử mua hàng
+    + Thêm đơn đang vận chuyển
+    ? Thêm giỏ hàng (để lưu các sản phẩm được thêm vào nhưng chưa thanh toán)
+- Hoá đơn
+    + Xem các đơn chưa xử lí
+    + Xem các đơn đang xử lí
+    + Xem các đơn đã thanh toán
+    + Xem các đơn bị huỷ
+- Logic 
+    + Đặt đơn  
+        . Chỉ được đặt 1 đơn / 1 lần
+        . Mỗi đơn có thể có nhiều sản phẩm 
+    + Phải đăng nhập mới được đặt đơn
+    + Phải đăng nhập mới được yêu thích sản phẩm 

@@ -1,0 +1,18 @@
+.order-container {
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 2px solid black;
+  p {
+    font-size: 22px;
+    font-size: 700;
+  }
+  .ID {
+    width: 100%;
+    text-align: left;
+  }
+  .total {
+    width: 100%;
+    text-align: right;
+    color: red;
+  }
+}
