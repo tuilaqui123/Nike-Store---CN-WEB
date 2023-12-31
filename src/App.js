@@ -1,5 +1,6 @@
 import './App.css';
 import React from 'react';
+import {ToastContainer} from 'react-toastify'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from './Components/footer/Footer';
 import SignIn from './Components/login/signIn';
@@ -13,6 +14,7 @@ import ItemView from './Components/display/item view/item_view';
 import CheckOut from './Components/checkout/checkout';
 import User from './Components/user/user';
 import { AppProvider } from './Context/AppContext';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
           <Footer />
         </BrowserRouter>
       </AppProvider>
+      <ToastContainer hideProgressBar/>
     </div>
   );
 }

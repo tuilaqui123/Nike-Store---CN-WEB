@@ -7,7 +7,7 @@ import { AppContext } from '../../Context/AppContext';
 
 const Navbar = () => {
 
-    const { nikeSide, sportSide } = useContext(AppContext)
+    const { nikeSide, sportSide, customer } = useContext(AppContext)
     const navigate = useNavigate()
 
     const [isHover, setIsHover] = useState(false)
@@ -38,22 +38,23 @@ const Navbar = () => {
         <div className="navbar-container">
             <div className="header" onMouseEnter={handleOutHover}>
                 <p>logo</p>
-                <div className="login" >
-                    <Link to="/SignUp" style={linkStyle}>
-                        <p>Sign Up</p>
+                {!customer ? 
+                    <div className="login" >
+                        <Link to="/SignUp" style={linkStyle}>
+                            <p>Sign Up</p>
+                        </Link>
+                        <p>|</p>
+                        <Link to="/SignIn" style={linkStyle}>
+                            <p>Sign In</p>
+                        </Link>
+                    </div> :
+                    <Link to="/User" style={linkStyle}>
+                        <div className="is-login">
+                            <p>{'Hi, ' + customer?.name}</p>
+                            <FontAwesomeIcon icon={faUser} />
+                        </div>
                     </Link>
-                    <p>|</p>
-                    <Link to="/SignIn" style={linkStyle}>
-                        <p>Sign In</p>
-                    </Link>
-                </div>
-                {/* <div className="is-login" style={hidden}> */}
-                <Link to="/User" style={linkStyle}>
-                    <div className="is-login">
-                        <p>Hi, Qui</p>
-                        <FontAwesomeIcon icon={faUser} />
-                    </div>
-                </Link>
+                }
             </div>
             <div className="navbar">
                 <p>logo</p>
