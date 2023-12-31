@@ -2,6 +2,7 @@ import './checkout.css'
 import CheckoutItem from './checkout item/checkout-item';
 import { useContext } from 'react';
 import { AppContext } from '../../Context/AppContext';
+import PriceFormat from '../../Context/PriceFormat';
 
 const CheckOut = () => {
 
@@ -58,7 +59,11 @@ const CheckOut = () => {
                     <div className="summary-section">
                         <div className="summary-content">
                             <p>Subtotal</p>
-                            <p>{subTotal} VNĐ</p>
+                            <p>
+                                <PriceFormat>
+                                    {subTotal}
+                                </PriceFormat>
+                                VNĐ</p>
                         </div>
                         <div className="summary-content">
                             <p>Delivery/Shipping</p>
@@ -68,7 +73,11 @@ const CheckOut = () => {
                     <div className="summary-section">
                         <div className="summary-content">
                             <p>Total</p>
-                            <p>{subTotal + 250000} VNĐ</p>
+                            <p>
+                                <PriceFormat>
+                                    {subTotal + 250000}
+                                </PriceFormat>
+                                VNĐ</p>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import './checkout-item.css'
 import img_shoe from '../../../asset/Images/img-shoe.jpg'
+import PriceFormat from '../../../Context/PriceFormat';
 
 const CheckoutItem = ({ item }) => {
     return (
@@ -16,7 +17,11 @@ const CheckoutItem = ({ item }) => {
                     <p>Size: {item.size}</p>
                     <p>Quantity: {item.quantity}</p>
                 </div>
-                <p className="item-price">{item.item.price} VNĐ</p>
+                <p className="item-price">
+                    <PriceFormat>
+                        {item.item.price}
+                    </PriceFormat>
+                    VNĐ</p>
             </div>
         </div>
     );

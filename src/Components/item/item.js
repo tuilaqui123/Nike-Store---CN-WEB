@@ -1,4 +1,6 @@
 import './item.css'
+import PriceFormat from '../../Context/PriceFormat';
+
 
 const Item = ({ name, types, price, image }) => {
     return (
@@ -11,7 +13,11 @@ const Item = ({ name, types, price, image }) => {
             <div className="item-content">
                 <p className="item-name">{name}</p>
                 <p className="item-category">{types}</p>
-                <p className="item-price">{price} VNĐ</p>
+                <p className="item-price">
+                    <PriceFormat>
+                        {price}
+                    </PriceFormat>
+                    VNĐ</p>
             </div>
         </div>
     );

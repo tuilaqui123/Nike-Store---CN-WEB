@@ -88,7 +88,11 @@ const Cart = () => {
                         <div className="summary-content">
                             <p>Total</p>
                             {subTotal !== 0 ? (
-                                <p>{subTotal + 250000}  VNĐ</p>
+                                <p>
+                                    <PriceFormat>
+                                        {subTotal + 250000}
+                                    </PriceFormat>
+                                    VNĐ</p>
                             ) : (
                                 <p>0 VNĐ</p>
                             )}

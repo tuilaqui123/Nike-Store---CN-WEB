@@ -1,7 +1,9 @@
 import './item_view.css'
 import React, { useEffect, useState, useContext } from 'react';
+import clsx from 'clsx';
 import { AppContext } from '../../../Context/AppContext';
 import { useParams } from 'react-router-dom'
+import PriceFormat from '../../../Context/PriceFormat';
 
 
 const ItemView = () => {
@@ -57,11 +59,9 @@ const ItemView = () => {
     function AddToBag() {
         var sizeTable = document.querySelector('.detail-size')
         if (size === '') {
-            sizeTable.classList.add('alert-size')
             setTextAlert(true)
         }
         else {
-            sizeTable.classList.remove('alert-size')
             setTextAlert(false)
             var item = {
                 name: product.name,
@@ -148,9 +148,21 @@ const ItemView = () => {
                 <div className="detail-content">
                     <p className="item-name">{product.name}</p>
                     <p className="item-category">{product.type?.name}</p>
-                    <p className="item-price">{product.price} VNĐ</p>
+                    <p className="item-price">
+                        <PriceFormat>
+                            {product.price}
+                        </PriceFormat>
+                        VNĐ</p>
                 </div>
-                <div className="detail-size">
+                <div className={
+                    clsx(
+                        'detail-size',
+                        {
+                            'alert-size': textAlert,
+                        }
+                    )
+
+                }>
                     <p>Select Size</p>
                     <ul className="size-table">
                         {product.sizes?.map((value, index) =>
