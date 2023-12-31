@@ -1,10 +1,15 @@
 import './user.css'
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import avt from '../../asset/Images/avt.jpg'
 import Delivery from './user components/delivery';
 import Ordered from './user components/ordered';
+import { AppContext } from '../../Context/AppContext';
+import { useNavigate } from 'react-router-dom'
 
 const User = () => {
+
+    const navigate = useNavigate()
+    const { customer, setCustomer } = useContext(AppContext)
 
     const [isLoad, setIsLoad] = useState('Order')
 
@@ -24,6 +29,11 @@ const User = () => {
         listItem.classList.add('chose');
     }
 
+    function LogOut() {
+        setCustomer(null)
+        navigate('Home')
+    }
+
     return (
         <div className="user-container">
             <div className="user">
@@ -36,12 +46,13 @@ const User = () => {
                         />
                     </li>
                     <li>
-                        <p>Pham Qui</p>
+                        <p>{customer?.name}</p>
                     </li>
                 </ul>
                 <ul className="user-button">
                     <li onClick={chose}><p>Order</p></li>
                     <li onClick={chose}><p>Deliveried</p></li>
+                    <li onClick={LogOut}><p>Log out</p></li>
                 </ul>
             </div>
             <div className="user-main">

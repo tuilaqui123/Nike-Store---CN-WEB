@@ -14,8 +14,9 @@ redux/ react context
 - thong bao khi them vao gio hang, yeu thich
 - kiem tr lai cart (product type name)
 - local storage
-- them label trc input
-- clone be fe mới nhất
+
+- đã có log 
+
 
 *nội dung cần sửa
 - Khách hàng:
@@ -29,8 +30,4 @@ redux/ react context
     + Xem các đơn đã thanh toán
     + Xem các đơn bị huỷ
 - Logic 
-    + Đặt đơn  
-        . Chỉ được đặt 1 đơn / 1 lần
-        . Mỗi đơn có thể có nhiều sản phẩm 
-    + Phải đăng nhập mới được đặt đơn
     + Phải đăng nhập mới được yêu thích sản phẩm 

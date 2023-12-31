@@ -9,10 +9,10 @@ export const AppProvider = ({ children }) => {
     const [cart, setCart] = useState([])
     const [bag, setBag] = useState([])
     const [subTotal, setSubTotal] = useState(0)
+    const [customer, setCustomer] = useState(null)
 
     const [sportSide, setSportSide] = useState([])
     const [nikeSide, setNikeSide] = useState([])
-    const [customer, setCustomer] = useState(null)
 
 
     useEffect(() => {
