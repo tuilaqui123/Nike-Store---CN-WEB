@@ -12,6 +12,7 @@ export const AppProvider = ({ children }) => {
 
     const [sportSide, setSportSide] = useState([])
     const [nikeSide, setNikeSide] = useState([])
+    const [customer, setCustomer] = useState(null)
 
 
     useEffect(() => {
@@ -58,6 +59,7 @@ export const AppProvider = ({ children }) => {
         bag, setBag,
         subTotal, setSubTotal,
         nikeSide, sportSide,
+        customer, setCustomer
     }}>
         {children}
     </AppContext.Provider>
