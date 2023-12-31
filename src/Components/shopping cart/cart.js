@@ -3,31 +3,41 @@ import CartItem from './cart item/cart_item';
 import { AppContext } from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom';
 import './cart.css'
-
+import PriceFormat from '../../Context/PriceFormat';
 
 const Cart = () => {
 
     const navigate = useNavigate()
-    const { cart } = useContext(AppContext)
+    const { cart, bag, setBag, subTotal, setSubTotal } = useContext(AppContext)
 
+    const [isSelect, setIsSelect] = useState(false)
 
-    // Get product (using useParams to get id in url)
-    // useEffect(() => {
-    //     for (let index = 0; index < cart.length; index++) {
-    //         fetch('http://localhost:5000/api/product' + '/' + cart[index].id)
-    //             .then((response) => response.json())
-    //             .then(resJson => {
-    //                 console.log(resJson.prduct)
-    //             })
-    //     }
-    // }, [cart])
+    useEffect(() => {
+        setBag([])
+        setSubTotal(0)
+    }, [])
 
-    console.log(cart)
-
+    function isCheck(index, checked) {
+        if (checked) {
+            setBag([...bag, cart[index]])
+            var temp = subTotal + cart[index].item.price
+            setSubTotal(temp)
+        }
+        else {
+            setBag(bag.filter(item => item !== cart[index]))
+            var temp = subTotal - cart[index].item.price
+            setSubTotal(temp)
+        }
+    }
 
 
     function GotoCheckout() {
-        navigate("/Checkout")
+        if (subTotal !== 0) {
+            setIsSelect(false)
+            navigate("/Checkout")
+        }
+        else setIsSelect(true)
+
     }
 
     return (
@@ -35,12 +45,21 @@ const Cart = () => {
             <div className="cart">
                 <h3>Bag</h3>
                 <div className="cart-main">
-                    {cart.map((value, index) =>
-                        <CartItem
-                            key={index}
-                            id={value.id}
-                            size={value.size}
-                        />
+                    {cart !== null ? (
+                        <>
+                            {cart.map((value, index) =>
+                                <CartItem
+                                    key={index}
+                                    index={index}
+                                    item={value.item}
+                                    size={value.size}
+                                    quantity={value.quantity}
+                                    isCheck={isCheck}
+                                />
+                            )}
+                        </>
+                    ) : (
+                        <p>No item display.</p>
                     )}
                 </div>
             </div>
@@ -50,19 +69,34 @@ const Cart = () => {
                     <div className="summary-section">
                         <div className="summary-content">
                             <p>Subtotal</p>
-                            <p>3,000,000 VNĐ</p>
+                            <p>
+                                <PriceFormat>
+                                    {subTotal}
+                                </PriceFormat>
+                                VNĐ</p>
                         </div>
                         <div className="summary-content">
                             <p>Estimated Delivery & Handling</p>
-                            <p>250,000 VNĐ</p>
+                            {subTotal !== 0 ? (
+                                <p>250,000 VNĐ</p>
+                            ) : (
+                                <p>0 VNĐ</p>
+                            )}
                         </div>
                     </div>
                     <div className="summary-section">
                         <div className="summary-content">
                             <p>Total</p>
-                            <p>3,250,000 VNĐ</p>
+                            {subTotal !== 0 ? (
+                                <p>{subTotal + 250000}  VNĐ</p>
+                            ) : (
+                                <p>0 VNĐ</p>
+                            )}
                         </div>
                     </div>
+                    {isSelect && (
+                        <p className="alert-text">Please select at least one item.</p>
+                    )}
                     <button className="summary-button" onClick={GotoCheckout}>
                         <p>Checkout</p>
                     </button>

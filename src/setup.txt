@@ -12,7 +12,10 @@ redux/ react context
 
 - them dau tick o checkout
 - thong bao khi them vao gio hang, yeu thich
--kiem tr lai cart (product type name)
+- kiem tr lai cart (product type name)
+- local storage
+- them label trc input
+- clone be fe mới nhất
 
 *nội dung cần sửa
 - Khách hàng:

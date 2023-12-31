@@ -1,23 +1,42 @@
+import './navbar.css'
+import React, { useContext, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faHeart, faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons'
-import './navbar.css'
-import { Link } from 'react-router-dom';
-import React from 'react';
+import { AppContext } from '../../Context/AppContext';
 
 const Navbar = () => {
+
+    const { nikeSide, sportSide } = useContext(AppContext)
+    const navigate = useNavigate()
+
+    const [isHover, setIsHover] = useState(false)
+    const [btnHover, setBtnHover] = useState('')
 
     const linkStyle = {
         textDecoration: "none",
         color: "#111111"
     };
 
-    const hidden = {
-        display: "none"
-    };
+    function handleOnHover(event) {
+        const liText = event.currentTarget.textContent;
+        setBtnHover(liText)
+        setIsHover(true)
+    }
+
+    function handleOutHover() {
+        setIsHover(false)
+    }
+
+    function choseType(event) {
+        const liText = event.currentTarget.querySelector('p').textContent
+        if (btnHover === 'Explore Nike') navigate(`/d/nikes/${liText}`)
+        if (btnHover === 'Shop by Sport') navigate(`/d/sport/${liText}`)
+    }
 
     return (
         <div className="navbar-container">
-            <div className="header">
+            <div className="header" onMouseEnter={handleOutHover}>
                 <p>logo</p>
                 <div className="login" >
                     <Link to="/SignUp" style={linkStyle}>
@@ -43,24 +62,24 @@ const Navbar = () => {
                         <Link to="/Home" style={linkStyle}>
                             <li>Home</li>
                         </Link>
-                        <Link to="/d/new" style={linkStyle}>
-                            <li>New & Featured</li>
+                        <Link to="/d/jordan" style={linkStyle}>
+                            <li onMouseEnter={handleOutHover}>Jordan to You</li>
                         </Link>
-                        <Link to="/d/all-item" style={linkStyle}>
-                            <li>Explore Nike</li>
+                        <Link to="/d/nikes" style={linkStyle}>
+                            <li onMouseEnter={handleOnHover} >Explore Nike</li>
                         </Link>
-                        <Link to="/d/sale" style={linkStyle}>
-                            <li>Sale Season</li>
+                        <Link to="/d/sport" style={linkStyle}>
+                            <li onMouseEnter={handleOnHover} >Shop by Sport</li>
                         </Link>
                     </ul>
-                    <div className="nav-search">
+                    <div className="nav-search" onMouseEnter={handleOutHover}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
                         <input
                             type="text"
                             placeholder="Search"
                         />
                     </div>
-                    <div className="nav-other">
+                    <div className="nav-other" onMouseEnter={handleOutHover}>
                         <Link to="/Favourite">
                             <FontAwesomeIcon icon={faHeart} className="heart-icon other-icon" />
                         </Link>
@@ -70,6 +89,31 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
+            {isHover && (
+                <ul className="navbar-hover"
+                    onMouseLeave={handleOutHover}
+                >
+                    {btnHover === 'Explore Nike' && (
+                        <>
+                            {nikeSide.map((value, index) => (
+                                <li key={index} onClick={choseType}>
+                                    <p>{value}</p>
+                                </li>
+                            ))}
+                        </>
+                    )}
+
+                    {btnHover === 'Shop by Sport' && (
+                        <>
+                            {sportSide.map((value, index) => (
+                                <li key={index} onClick={choseType}>
+                                    <p>{value}</p>
+                                </li>
+                            ))}
+                        </>
+                    )}
+                </ul>
+            )}
 
         </div>
     );

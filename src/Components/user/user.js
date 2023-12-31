@@ -1,15 +1,19 @@
 import './user.css'
-import React from 'react';
+import React, { useState } from 'react';
 import avt from '../../asset/Images/avt.jpg'
-import Order from './user components/order';
-import Setting from './user components/setting';
-import History from './user components/history';
+import Delivery from './user components/delivery';
+import Ordered from './user components/ordered';
 
 const User = () => {
 
+    const [isLoad, setIsLoad] = useState('Order')
+
     function chose(event) {
         const listItem = event.currentTarget;
+        const liText = event.currentTarget.querySelector('p').textContent
         const allListItems = document.querySelectorAll('ul li');
+
+        setIsLoad(liText)
 
         // Remove the "chose" class from all <li> elements
         allListItems.forEach(item => {
@@ -22,26 +26,31 @@ const User = () => {
 
     return (
         <div className="user-container">
-            <ul className="user-info">
-                <li>
-                    <img
-                        className="avt"
-                        src={avt}
-                        alt="avt"
-                    />
-                </li>
-                <li><p>Name: Qui</p></li>
-                <li><p>Phone: 0999888777</p></li>
-            </ul>
             <div className="user">
-                <ul className="user-button">
-                    <li><p>Order</p></li>
-                    <li><p>Order History</p></li>
-                    <li><p>Setting</p></li>
+                <ul className="user-info">
+                    <li>
+                        <img
+                            className="avt"
+                            src={avt}
+                            alt="avt"
+                        />
+                    </li>
+                    <li>
+                        <p>Pham Qui</p>
+                    </li>
                 </ul>
-                <div className="user-main">
-                    <History />
-                </div>
+                <ul className="user-button">
+                    <li onClick={chose}><p>Order</p></li>
+                    <li onClick={chose}><p>Deliveried</p></li>
+                </ul>
+            </div>
+            <div className="user-main">
+                {isLoad === 'Order' && (
+                    <Ordered />
+                )}
+                {isLoad === 'Deliveried' && (
+                    <Delivery />
+                )}
             </div>
         </div>
     );

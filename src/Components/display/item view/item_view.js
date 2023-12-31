@@ -10,7 +10,11 @@ const ItemView = () => {
 
     const [product, setProduct] = useState({})
     const [mainImg, setMainImg] = useState()
-    const [size, setSize] = useState()
+    const [size, setSize] = useState('')
+    const [quantity, setQuantity] = useState(1)
+    const [isEditable, setIsEditable] = useState(false);
+
+    const [textAlert, setTextAlert] = useState(false)
 
     // Get product (using useParams to get id in url)
     useEffect(() => {
@@ -34,6 +38,9 @@ const ItemView = () => {
     }
 
     function choseSize(event) {
+        var sizeTable = document.querySelector('.detail-size')
+        sizeTable.classList.remove('alert-size')
+        setTextAlert(false)
         const listItem = event.currentTarget;
         const allListItems = document.querySelectorAll('ul li');
 
@@ -48,9 +55,72 @@ const ItemView = () => {
     }
 
     function AddToBag() {
-        var temp = { id: params.id, size: size }
-        setCart([...cart, temp])
+        var sizeTable = document.querySelector('.detail-size')
+        if (size === '') {
+            sizeTable.classList.add('alert-size')
+            setTextAlert(true)
+        }
+        else {
+            sizeTable.classList.remove('alert-size')
+            setTextAlert(false)
+            var item = {
+                name: product.name,
+                type: product.type?.name,
+                price: product.price * quantity,
+                image: product.images[0]
+            }
+            var temp = {
+                id: params.id,
+                item: item,
+                size: size,
+                quantity: quantity
+            }
+            const existingItemIndex = cart.findIndex((cartItem) => {
+                return (
+                    cartItem.item.name === item.name &&
+                    cartItem.item.type === item.type &&
+                    cartItem.size === size
+                );
+            });
+
+            if (existingItemIndex !== -1) {
+                // If the item already exists, update the quantity
+                const updatedCart = [...cart];
+                updatedCart[existingItemIndex].quantity += quantity;
+                setCart(updatedCart);
+            } else {
+                // If the item doesn't exist, add it to the cart
+                setCart([...cart, temp]);
+            }
+        }
     }
+
+
+    function incQuantity() {
+        setQuantity((prevQuantity) => prevQuantity + 1);
+    }
+
+    function decQuantity() {
+        if (quantity > 1) {
+            setQuantity((prevQuantity) => prevQuantity - 1);
+        }
+    }
+
+    function handleInputChange(event) {
+        const newQuantity = parseInt(event.target.value, 10) || 0;
+        setQuantity(newQuantity);
+    }
+
+    function handleInputChange(event) {
+        setQuantity(event.target.value);
+    }
+
+    function handleInputBlur() {
+        setIsEditable(false);
+        if (quantity == '0') setQuantity(1)
+        else setQuantity(parseInt(quantity, 10));
+    }
+
 
     return (
         <div className="itemview-container">
@@ -93,6 +163,28 @@ const ItemView = () => {
                             </li>
                         )}
                     </ul>
+                    {textAlert && (
+                        <p>Please select a size.</p>
+                    )}
+                </div>
+                <div className='detail-quantity'>
+                    <p>Select Quantity</p>
+                    <div className='quantity-selector'>
+                        <button onClick={decQuantity}>
+                            <p>-</p>
+                        </button>
+                        <input
+                            type='text'
+                            value={quantity}
+                            onChange={handleInputChange}
+                            onFocus={() => setIsEditable(true)}
+                            onBlur={handleInputBlur}
+                            readOnly={!isEditable}
+                        />
+                        <button onClick={incQuantity}>
+                            <p>+</p>
+                        </button>
+                    </div>
                 </div>
                 <div className="detail-button">
                     <button className="add-bag" onClick={AddToBag}>

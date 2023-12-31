@@ -1,16 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import './item_display.css'
 import Item from '../item/item';
 import { AppContext } from '../../Context/AppContext';
+import DisplaySide from './display-side';
+import Display from './display';
 
 const ItemDisplay = () => {
-    const { productTypes, products } = useContext(AppContext)
+    const { products } = useContext(AppContext)
     const params = useParams()
 
-    if (params.id == 'all-item') params.id = 'All Items'
+    if (params.id === 'nikes') params.id = 'Explore Nike'
 
     const [isSort, setIsSort] = useState(false)
     const [buttonText, setButtonText] = useState('Sort By')
@@ -28,18 +30,19 @@ const ItemDisplay = () => {
         textDecoration: "none",
         color: "#111111"
     };
-    const navigate = useNavigate()
-
-    function choseType(event) {
-        const liText = event.currentTarget.querySelector('p').textContent
-        navigate(`/d/${liText}`)
-    }
 
     return (
         <div className="display-container">
             <div className="display-header">
                 <div className="display-title">
-                    <h3>{params.id}</h3>
+                    {params.cate ? (
+                        <>
+                            <h3>{params.id.toUpperCase() + ' / '}</h3>
+                            <p> {params.cate.toUpperCase()}</p>
+                        </>
+                    ) : (
+                        <h3>{params.id.toUpperCase()}</h3>
+                    )}
                 </div>
                 <div className="button-header" onClick={showSort}>
                     <div className="button-context">
@@ -58,40 +61,11 @@ const ItemDisplay = () => {
 
             </div>
             <div className="display-content">
-                <ul className="display-side">
-                    {productTypes.map((value, index) =>
-                        <li key={index} onClick={choseType}><p>{value.name}</p></li>
-                    )}
-
-                </ul>
+                <DisplaySide
+                    tag={params.id}
+                />
                 <div className="display-main">
-                    {params.id === 'All Items' ? (
-                        products.map((value, index) => (
-                            <Link to={`/i/${value.id}/${value.name}`} style={linkStyle} key={index}>
-                                <Item
-                                    name={value.name}
-                                    types={value.type.name}
-                                    price={value.price}
-                                    image={value.images[0]}
-                                />
-                            </Link>
-                        ))
-                    ) : (
-                        products.map((value, index) => {
-                            if (value.type.name === params.id) {
-                                return (
-                                    <Link to={`/i/${value.id}/${value.name}`} style={linkStyle} key={index}>
-                                        <Item
-                                            name={value.name}
-                                            types={value.type.name}
-                                            price={value.price}
-                                            image={value.images[0]}
-                                        />
-                                    </Link>
-                                );
-                            }
-                        })
-                    )}
+                    <Display />
                 </div>
             </div>
         </div>

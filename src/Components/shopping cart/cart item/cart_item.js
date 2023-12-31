@@ -1,39 +1,46 @@
 import './cart_item.css'
-import React, { useContext, useState, useEffect } from 'react';
-import { AppContext } from '../../../Context/AppContext';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
-import img_shoe from '../../../asset/Images/img-shoe.jpg'
 
-const CartItem = ({ id, size }) => {
+const CartItem = ({ index, item, size, quantity, isCheck }) => {
 
-    const [product, setProduct] = useState({})
+    const [checked, setChecked] = useState(false);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/api/product' + '/' + id)
-            .then((response) => response.json())
-            .then(resJson => {
-                setProduct(resJson.product)
-            })
-    })
+    const handleChange = () => {
+        if (checked) {
+            setChecked(false)
+            isCheck(index, false)
+        }
+        else {
+            setChecked(true)
+            isCheck(index, true)
+        }
+    };
 
     return (
         <div className="cart-item-container">
             <img
                 className="item-img"
-                src={img_shoe}
+                src={item.image}
                 alt="shoe"
             />
             <div className="cart-item-detail">
                 <div className="detail">
                     <div className="detail-header">
-                        <p>{product.name}</p>
-                        <p>{product.price} VNĐ</p>
+                        <p>{item.name}</p>
+                        <p>{item.price} VNĐ</p>
                     </div>
-                    <p></p>
+                    <div className="detail-mid">
+                        <p>{item.type}</p>
+                        <input type="checkbox"
+                            checked={checked}
+                            onChange={handleChange}
+                        />
+                    </div>
                     <div className="detail-content">
                         <p>Size: {size}</p>
-                        <p>Quantity: 1</p>
+                        <p>Quantity: {quantity}</p>
                     </div>
                 </div>
                 <div className="detail-button">

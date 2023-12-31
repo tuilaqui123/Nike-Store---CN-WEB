@@ -1,5 +1,5 @@
 .checkout-item {
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   height: 150px;
@@ -35,7 +35,7 @@
       font-weight: 500;
     }
     .checkout-item-content {
-      width: 25%;
+      width: 35%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;

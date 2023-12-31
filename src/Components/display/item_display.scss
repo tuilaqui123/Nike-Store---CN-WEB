@@ -13,11 +13,17 @@
     align-items: center;
     justify-content: space-between;
     .display-title {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: flex-end;
       h3 {
         font-family: "Oswald", sans-serif;
         font-weight: 500;
         font-size: 30px;
         margin: 0;
+        padding: 0;
+        margin-right: 5px;
       }
       p {
         font-family: "Oswald", sans-serif;
@@ -111,14 +117,13 @@
         cursor: pointer;
         p {
           font-family: "Oswald", sans-serif;
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 300;
           transition: 0.2s;
         }
         &:hover {
           p {
             font-weight: 500;
-            font-size: 20px;
           }
         }
       }

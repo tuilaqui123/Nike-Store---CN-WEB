@@ -49,24 +49,30 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #3e3e3e;
-    padding-left: 50px;
-    padding-right: 50px;
+    width: 100%;
+    height: 50px;
     .nav-section {
       width: 85%;
+      height: 100%;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      margin: 0;
+      padding: 0;
       .nav-selection {
         font-family: "Oswald", sans-serif;
         width: 65%;
+        padding: 0;
+        margin: 0;
+        height: 100%;
         list-style-type: none;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-evenly;
-        cursor: pointer;
         li {
+          cursor: pointer;
           border-bottom: 2px solid white;
           transition: 0.2s;
           &:hover {
@@ -111,47 +117,32 @@
       }
     }
   }
-  // .navbar-hover {
-  //   background-color: #f5f5f5;
-  //   width: 100%;
-  //   height: 100px;
-  //   padding: 0;
-  //   margin: 0;
-  //   list-style-type: none;
-  //   display: flex;
-  //   flex-direction: row;
-  //   justify-content: center;
-  //   align-items: center;
-  //   box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
-  //   li {
-  //     width: 10%;
-  //     height: 40%;
-  //     margin-left: 30px;
-  //     margin-right: 30px;
-  //     border: 1px solid #f5f5f5;
-  //     border-radius: 5px;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     cursor: pointer;
-  //     p {
-  //       padding: 0;
-  //       margin: 0;
-  //       font-weight: 300;
-  //       font-size: 18px;
-  //     }
-  //     transition: 0.2s;
-  //     &:hover {
-  //       width: 20%;
-  //       height: 50%;
-  //       border: 1px solid black;
-  //       background-color: black;
-  //       p {
-  //         font-size: 18px;
-  //         font-weight: 500;
-  //         color: white;
-  //       }
-  //     }
-  //   }
-  // }
+  .navbar-hover {
+    width: 100%;
+    height: 70px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #111;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    li {
+      border-bottom: 2px solid #f5f5f5;
+      transition: 0.2s;
+      cursor: pointer;
+      font-size: 20px;
+      &:hover {
+        border-bottom: 2px solid black;
+      }
+      p {
+        padding: 0;
+        margin: 0;
+        font-weight: 300;
+        font-size: 18px;
+      }
+    }
+  }
 }

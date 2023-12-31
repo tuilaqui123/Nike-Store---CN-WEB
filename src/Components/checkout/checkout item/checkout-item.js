@@ -1,22 +1,22 @@
 import './checkout-item.css'
 import img_shoe from '../../../asset/Images/img-shoe.jpg'
 
-const CheckoutItem = () => {
+const CheckoutItem = ({ item }) => {
     return (
         <div className="checkout-item">
             <img
                 className="checkout-img"
-                src={img_shoe}
+                src={item.item.image}
                 alt="shoe"
             />
             <div className="checkout-item-detail">
-                <p className="item-name">Nike Dunk Retro Low</p>
-                <p className="item-category">Basketball</p>
+                <p className="item-name">{item.item.name}</p>
+                <p className="item-category">{item.item.type}</p>
                 <div className="checkout-item-content">
-                    <p>Size: 42</p>
-                    <p>Quantity: 1</p>
+                    <p>Size: {item.size}</p>
+                    <p>Quantity: {item.quantity}</p>
                 </div>
-                <p className="item-price">3,000,000 VNĐ</p>
+                <p className="item-price">{item.item.price} VNĐ</p>
             </div>
         </div>
     );

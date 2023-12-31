@@ -1,32 +1,52 @@
 import './checkout.css'
 import CheckoutItem from './checkout item/checkout-item';
+import { useContext } from 'react';
+import { AppContext } from '../../Context/AppContext';
 
 const CheckOut = () => {
+
+    const { bag, subTotal } = useContext(AppContext)
+
     return (
         <div className="checkout-container">
             <div className="address">
                 <h3>Checkout Infomation</h3>
                 <div className="address-input">
-                    <input
-                        type="text"
-                        placeholder="First Name"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Last Name"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Phone Number"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Email"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Address"
-                    />
+                    <div className="input-box">
+                        <p>First name:</p>
+                        <input
+                            type="text"
+                            placeholder="First name"
+                        />
+                    </div>
+                    <div className="input-box">
+                        <p>Last name:</p>
+                        <input
+                            type="text"
+                            placeholder="Last name"
+                        />
+                    </div>
+                    <div className="input-box">
+                        <p>Email:</p>
+                        <input
+                            type="text"
+                            placeholder="Email"
+                        />
+                    </div>
+                    <div className="input-box">
+                        <p>Phone number:</p>
+                        <input
+                            type="text"
+                            placeholder="Phone number"
+                        />
+                    </div>
+                    <div className="input-box">
+                        <p>Address:</p>
+                        <input
+                            type="text"
+                            placeholder="Address"
+                        />
+                    </div>
                 </div>
                 <button className="address-button">
                     <p>Order</p>
@@ -38,7 +58,7 @@ const CheckOut = () => {
                     <div className="summary-section">
                         <div className="summary-content">
                             <p>Subtotal</p>
-                            <p>3,000,000 VNĐ</p>
+                            <p>{subTotal} VNĐ</p>
                         </div>
                         <div className="summary-content">
                             <p>Delivery/Shipping</p>
@@ -48,14 +68,18 @@ const CheckOut = () => {
                     <div className="summary-section">
                         <div className="summary-content">
                             <p>Total</p>
-                            <p>3,250,000 VNĐ</p>
+                            <p>{subTotal + 250000} VNĐ</p>
                         </div>
                     </div>
                 </div>
-                <CheckoutItem />
-                <CheckoutItem />
-                <CheckoutItem />
-                <CheckoutItem />
+                <div className="checkout-items">
+                    {bag.map((item, index) =>
+                        <CheckoutItem
+                            key={index}
+                            item={item}
+                        />
+                    )}
+                </div>
             </div>
         </div>
     );
