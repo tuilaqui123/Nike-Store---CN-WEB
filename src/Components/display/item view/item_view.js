@@ -71,6 +71,7 @@ const ItemView = () => {
             }
             var temp = {
                 id: params.id,
+                productSize: product.sizes.find(s => s.size === Number(size)),
                 item: item,
                 size: size,
                 quantity: quantity
