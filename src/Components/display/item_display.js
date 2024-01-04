@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSort } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams } from 'react-router-dom';
@@ -11,6 +11,10 @@ import Display from './display';
 const ItemDisplay = () => {
     const { products } = useContext(AppContext)
     const params = useParams()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     if (params.id === 'nikes') params.id = 'Explore Nike'
 
@@ -51,10 +55,8 @@ const ItemDisplay = () => {
                     </div>
                     {isSort && (
                         <ul className="button-dropdown">
-                            <li onClick={sortText}><p>A-Z</p></li>
-                            <li onClick={sortText}><p>Z-A</p></li>
-                            <li onClick={sortText}><p>Giá giảm dần</p></li>
-                            <li onClick={sortText}><p>Giá tăng dần</p></li>
+                            <li onClick={sortText}><p>Low to High</p></li>
+                            <li onClick={sortText}><p>High to Low</p></li>
                         </ul>
                     )}
                 </div>
@@ -65,7 +67,9 @@ const ItemDisplay = () => {
                     tag={params.id}
                 />
                 <div className="display-main">
-                    <Display />
+                    <Display
+                        sortBtn={buttonText}
+                    />
                 </div>
             </div>
         </div>

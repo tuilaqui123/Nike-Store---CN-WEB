@@ -1,7 +1,8 @@
 import './order-item.css'
 import img_shoe from '../../../../asset/Images/img-shoe.jpg'
 
-const OrderItem = () => {
+const OrderItem = ({ item }) => {
+    console.log(item)
     return (
         <div className="cart-item-container">
             <img

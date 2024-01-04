@@ -20,11 +20,17 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding-top: 10px;
+    overflow: hidden;
     p {
       margin: 0;
       font-family: "Oswald", sans-serif;
       font-weight: 400;
       font-size: 20px;
+    }
+    .item-name {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .item-category {
       color: #9e9ea0;

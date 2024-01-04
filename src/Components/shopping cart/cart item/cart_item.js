@@ -2,8 +2,9 @@ import './cart_item.css'
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
+import PriceFormat from '../../../Context/PriceFormat';
 
-const CartItem = ({ index, item, size, quantity, isCheck }) => {
+const CartItem = ({ index, item, size, quantity, isCheck, Delete }) => {
 
     const [checked, setChecked] = useState(false);
 
@@ -16,7 +17,11 @@ const CartItem = ({ index, item, size, quantity, isCheck }) => {
             setChecked(true)
             isCheck(index, true)
         }
-    };
+    }
+
+    function handleDelete() {
+        Delete(index)
+    }
 
     return (
         <div className="cart-item-container">
@@ -29,7 +34,11 @@ const CartItem = ({ index, item, size, quantity, isCheck }) => {
                 <div className="detail">
                     <div className="detail-header">
                         <p>{item.name}</p>
-                        <p>{item.price} VNĐ</p>
+                        <p>
+                            <PriceFormat>
+                                {item.price}
+                            </PriceFormat>
+                            VNĐ</p>
                     </div>
                     <div className="detail-mid">
                         <p>{item.type}</p>
@@ -45,7 +54,7 @@ const CartItem = ({ index, item, size, quantity, isCheck }) => {
                 </div>
                 <div className="detail-button">
                     <FontAwesomeIcon icon={faHeart} className="detail-icon" />
-                    <FontAwesomeIcon icon={faTrash} className="detail-icon" />
+                    <FontAwesomeIcon icon={faTrash} className="detail-icon" onClick={handleDelete} />
                 </div>
             </div>
         </div>

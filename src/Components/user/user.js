@@ -1,15 +1,16 @@
 import './user.css'
 import React, { useContext, useState } from 'react';
 import avt from '../../asset/Images/avt.jpg'
-import Delivery from './user components/delivery';
-import Ordered from './user components/ordered';
+import Delivery from './user components/Deliveried/delivery';
+import Ordered from './user components/Ordered/ordered';
 import { AppContext } from '../../Context/AppContext';
 import { useNavigate } from 'react-router-dom'
 
 const User = () => {
 
     const navigate = useNavigate()
-    const { customer, setCustomer } = useContext(AppContext)
+    const { customer, setCustomer, order } = useContext(AppContext)
+
 
     const [isLoad, setIsLoad] = useState('Order')
 
@@ -31,7 +32,7 @@ const User = () => {
 
     function LogOut() {
         setCustomer(null)
-        navigate('Home')
+        navigate('/')
     }
 
     return (

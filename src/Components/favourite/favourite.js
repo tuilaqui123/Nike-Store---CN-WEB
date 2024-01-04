@@ -1,11 +1,16 @@
 import './favourite.css'
 import Item from '../item/item';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 
 const Favourite = () => {
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     function getItemInfomation(name, category, price) {
         navigate(`/Favourite/${name}`)

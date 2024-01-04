@@ -8,9 +8,13 @@ import PriceFormat from '../../Context/PriceFormat';
 const Cart = () => {
 
     const navigate = useNavigate()
-    const { cart, bag, setBag, subTotal, setSubTotal } = useContext(AppContext)
+    const { cart, setCart, bag, setBag, subTotal, setSubTotal } = useContext(AppContext)
 
     const [isSelect, setIsSelect] = useState(false)
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         setBag([])
@@ -30,36 +34,49 @@ const Cart = () => {
         }
     }
 
-
     function GotoCheckout() {
         if (subTotal !== 0) {
             setIsSelect(false)
             navigate("/Checkout")
         }
         else setIsSelect(true)
+    }
 
+    function handleDelete() {
+        bag.forEach(item => {
+            let index = cart.indexOf(item);
+            if (index !== -1) {
+                cart.splice(index, 1);
+            }
+        });
+        setBag([])
+        setSubTotal(0)
+    }
+
+    function Delete(deleteIndex) {
+        setCart(prevCart => prevCart.filter((_, index) => index !== deleteIndex));
     }
 
     return (
         <div className="cart-container">
             <div className="cart">
-                <h3>Bag</h3>
+                <div className="title">
+                    <h3>Bag</h3>
+                    {subTotal !== 0 && (
+                        <p onClick={handleDelete}>Delete</p>
+                    )}
+                </div>
                 <div className="cart-main">
-                    {cart !== null ? (
-                        <>
-                            {cart.map((value, index) =>
-                                <CartItem
-                                    key={index}
-                                    index={index}
-                                    item={value.item}
-                                    size={value.size}
-                                    quantity={value.quantity}
-                                    isCheck={isCheck}
-                                />
-                            )}
-                        </>
-                    ) : (
-                        <p>No item display.</p>
+                    {cart.map((value, index) =>
+                        <CartItem
+                            key={index}
+                            index={index}
+                            item={value.item}
+                            size={value.size}
+                            quantity={value.quantity}
+                            isCheck={isCheck}
+                            Delete={Delete}
+                        />
                     )}
                 </div>
             </div>

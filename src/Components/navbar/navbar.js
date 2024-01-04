@@ -12,6 +12,7 @@ const Navbar = () => {
 
     const [isHover, setIsHover] = useState(false)
     const [btnHover, setBtnHover] = useState('')
+    const [message, setMessage] = useState('');
 
     const linkStyle = {
         textDecoration: "none",
@@ -34,11 +35,28 @@ const Navbar = () => {
         if (btnHover === 'Shop by Sport') navigate(`/d/sport/${liText}`)
     }
 
+    function handleChange(event) {
+        setMessage(event.target.value);
+    };
+
+    function handleKeyDown(event) {
+        if (event.key === 'Enter') {
+            handleSearch()
+        }
+    };
+
+    function handleSearch() {
+        if (message !== '')
+            navigate(`/s/${message}`)
+    }
+
+
+
     return (
         <div className="navbar-container">
             <div className="header" onMouseEnter={handleOutHover}>
                 <p>logo</p>
-                {!customer ? 
+                {!customer ?
                     <div className="login" >
                         <Link to="/SignUp" style={linkStyle}>
                             <p>Sign Up</p>
@@ -74,10 +92,13 @@ const Navbar = () => {
                         </Link>
                     </ul>
                     <div className="nav-search" onMouseEnter={handleOutHover}>
-                        <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" />
+                        <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" onClick={handleSearch} />
                         <input
                             type="text"
                             placeholder="Search"
+                            value={message}
+                            onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                         />
                     </div>
                     <div className="nav-other" onMouseEnter={handleOutHover}>

@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import {ToastContainer} from 'react-toastify'
+import { ToastContainer } from 'react-toastify'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Footer from './Components/footer/Footer';
 import SignIn from './Components/login/signIn';
@@ -15,6 +15,7 @@ import CheckOut from './Components/checkout/checkout';
 import User from './Components/user/user';
 import { AppProvider } from './Context/AppContext';
 import 'react-toastify/dist/ReactToastify.css';
+import SearchDisplay from './Components/display/searchDisplay';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="i/:id/:name" element={<ItemView />} />
               <Route path="d/:id" element={<ItemDisplay />} />
               <Route path="d/:id/:cate" element={<ItemDisplay />} />
+              <Route path="s/:content" element={<SearchDisplay />} />
               <Route path="Checkout" element={<CheckOut />} />
               <Route path="User" element={<User />} />
               <Route path="Cart" element={<Cart />} />
@@ -40,7 +42,7 @@ function App() {
           <Footer />
         </BrowserRouter>
       </AppProvider>
-      <ToastContainer hideProgressBar/>
+      <ToastContainer hideProgressBar />
     </div>
   );
 }

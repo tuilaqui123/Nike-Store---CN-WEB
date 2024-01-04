@@ -1,10 +1,18 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 import './season.css'
+import { useNavigate } from 'react-router-dom';
 
-function SeasonContent({ videoUrl, tilte, content }) {
+function SeasonContent({ videoUrl, tilte, content, link }) {
+
+    const navigate = useNavigate()
+
+    function handleClick() {
+        navigate(link)
+    }
+
     return (
-        <div className="season-content">
+        <div className="season-content" onClick={handleClick}>
             <ReactPlayer
                 className="video"
                 width="90%"

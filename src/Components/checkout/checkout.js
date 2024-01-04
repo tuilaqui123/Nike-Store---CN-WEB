@@ -19,13 +19,15 @@ const validationSchema = Yup.object({
 
 const CheckOut = () => {
 
-    const { bag, subTotal, customer } = useContext(AppContext)
+    const { cart, bag, setBag, subTotal, customer } = useContext(AppContext)
     const [loading, setLoading] = useState(false);
     const [couponInput, setCouponInput] = useState('');
     const [coupon, setCoupon] = useState(null);
     const [validateOnChange, setValidateOnChange] = useState(false);
     const [coupons, setCoupons] = useState([]);
     const navigate = useNavigate();
+
+    console.log(bag)
 
     const form = useFormik({
         initialValues: {
@@ -37,6 +39,10 @@ const CheckOut = () => {
         validateOnBlur: false,
         validateOnChange: validateOnChange,
     });
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         const coupon = coupons.find((c) => c.name === couponInput);
@@ -74,7 +80,6 @@ const CheckOut = () => {
         return subTotal - (subTotal * coupon?.discountPercent) / 100;
     }, [coupon, subTotal]);
 
-    console.log(bag, subTotal)
 
     function handleFormsubmit(values) {
         setLoading(true);
@@ -106,9 +111,10 @@ const CheckOut = () => {
             .then((resJson) => {
                 if (resJson.success) {
                     // TODO: handle reset bag
+                    updateCart()
                     toast.success('Đặt hàng thành công');
                     setValidateOnChange(false);
-                    navigate('/');
+                    navigate('/User');
                 } else {
                     toast.error('Có lỗi xảy ra');
                 }
@@ -122,47 +128,38 @@ const CheckOut = () => {
             });
     }
 
+    function updateCart() {
+        bag.forEach(item => {
+            let index = cart.indexOf(item);
+            if (index !== -1) {
+                cart.splice(index, 1);
+            }
+        });
+        setBag([])
+    }
+
     return (
         <div className="checkout-container">
-            <form className="address" 
+            <form className="address"
                 onSubmit={(e) => {
                     setValidateOnChange(true);
                     form.handleSubmit(e);
                 }}>
                 <h3>Checkout Infomation</h3>
                 <div className="address-input">
-                    {/* <div className="input-box">
-                        <p>First name:</p>
-                        <input
-                            type="text"
-                            placeholder="First name"
-                        />
-                    </div>
                     <div className="input-box">
-                        <p>Last name:</p>
-                        <input
-                            type="text"
-                            placeholder="Last name"
-                        />
-                    </div>
-                    <div className="input-box">
-                        <p>Email:</p>
-                        <input
-                            type="text"
-                            placeholder="Email"
-                        />
-                    </div> */}
-                    <div className="input-box">
-                        <p>Phone number:</p>
-                        {customer && (
-                            <button
-                                type="button"
-                                className=""
-                                onClick={() => form.setFieldValue('phone', customer.phone)}
-                            >
-                                Mặc định
-                            </button>
-                        )}
+                        <div className="btn-box">
+                            <p>Phone number:</p>
+                            {customer && (
+                                <button
+                                    type="button"
+                                    className=""
+                                    onClick={() => form.setFieldValue('phone', customer.phone)}
+                                >
+                                    <p>Default</p>
+                                </button>
+                            )}
+                        </div>
                         <input
                             type="text"
                             placeholder="Phone number"
@@ -179,20 +176,22 @@ const CheckOut = () => {
                                 'show': form.errors.phone,
                             })}
                         >
-                            {form.errors.phone || 'No message'}
+                            {form.errors.phone || ''}
                         </span>
                     </div>
                     <div className="input-box">
-                        <p>Address:</p>
-                        {customer && (
-                            <button
-                                type="button"
-                                className=""
-                                onClick={() => form.setFieldValue('address', customer.address)}
-                            >
-                                Mặc định
-                            </button>
-                        )}
+                        <div className="btn-box">
+                            <p>Address:</p>
+                            {customer && (
+                                <button
+                                    type="button"
+                                    className=""
+                                    onClick={() => form.setFieldValue('address', customer.address)}
+                                >
+                                    <p>Default</p>
+                                </button>
+                            )}
+                        </div>
                         <input
                             type="text"
                             placeholder="Address"
@@ -209,15 +208,17 @@ const CheckOut = () => {
                                 'show': form.errors.address,
                             })}
                         >
-                            {form.errors.address || 'No message'}
+                            {form.errors.address || ''}
                         </span>
                     </div>
 
                     {/* DISPLAY COUPON WHEN CUSTOMER LOGIN */}
                     {customer && (
-                        <div>
+                        <>
                             <div className='input-box'>
-                                <p>Coupon:</p>
+                                <div className='btn-box'>
+                                    <p>Coupon:</p>
+                                </div>
                                 <input
                                     type="text"
                                     placeholder="Coupon"
@@ -256,10 +257,9 @@ const CheckOut = () => {
                                     </div>
                                 </div>
                             )}
-                        </div>
-                            
+                        </>
                     )}
-                    
+
                 </div>
                 <button className="address-button">
                     <p>Order</p>

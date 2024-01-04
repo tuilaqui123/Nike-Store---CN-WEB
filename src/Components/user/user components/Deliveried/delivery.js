@@ -1,5 +1,5 @@
-import OrderedItem from "./ordered-item";
-import './user-comp.css'
+import OrderedItem from "../Ordered/ordered-item";
+import '../user-comp.css'
 
 const Delivery = () => {
     return (

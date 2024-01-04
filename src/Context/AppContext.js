@@ -3,16 +3,20 @@ import React, { useState, useEffect, createContext } from "react";
 export const AppContext = createContext({});
 
 export const AppProvider = ({ children }) => {
-    const [productTypes, setProductTypes] = useState([])
-    const [products, setProducts] = useState([])
-    const [order, setOrder] = useState([])
-    const [cart, setCart] = useState([])
-    const [bag, setBag] = useState([])
-    const [subTotal, setSubTotal] = useState(0)
-    const [customer, setCustomer] = useState(null)
+    const [productTypes, setProductTypes] = useState([]) //product types (includes sport types and nike types)
+    const [products, setProducts] = useState([]) //product
 
-    const [sportSide, setSportSide] = useState([])
-    const [nikeSide, setNikeSide] = useState([])
+    const [jordan, setJordan] = useState([]) //jordan shoes
+    const [nike, setNike] = useState([]) //nike shoes
+    const [sport, setSport] = useState([]) //sport shoes
+    const [order, setOrder] = useState([]) //order
+    const [cart, setCart] = useState([]) //cart
+    const [bag, setBag] = useState([]) //bag (get item to checkout)
+    const [subTotal, setSubTotal] = useState(0) //bag total
+    const [customer, setCustomer] = useState(null) //customer
+
+    const [sportSide, setSportSide] = useState([]) //sport types
+    const [nikeSide, setNikeSide] = useState([]) // nike types
 
 
     useEffect(() => {
@@ -35,21 +39,42 @@ export const AppProvider = ({ children }) => {
                 setNikeSide(tempNike)
                 setSportSide(tempSport)
             })
+
         //Get product 
         fetch(`http://localhost:5000/api/product`)
             .then((response) => response.json())
             .then(resJsonProducts => {
+                var tempJordan = []
+                var tempNike = []
+                var tempSport = []
+                for (let index = 0; index < resJsonProducts.products.length; index++) {
+                    const types = resJsonProducts.products[index].type.name
+                    const IsNike = types.includes('Nike')
+                    if (types === 'Jordan') tempJordan.push(resJsonProducts.products[index])
+                    else if (IsNike) tempNike.push(resJsonProducts.products[index])
+                    else tempSport.push(resJsonProducts.products[index])
+                }
+                setJordan(tempJordan)
+                setNike(tempNike)
+                setSport(tempSport)
                 setProducts(resJsonProducts.products)
             })
 
-        // Get order
-        fetch(`http://localhost:5000/api/order`)
-            .then((response) => response.json())
-            .then(resJsonOrder => {
-                console.log(resJsonOrder)
-            })
-
     }, [])
+
+    useEffect(() => {
+        if (customer !== null) {
+            fetch(`http://localhost:5000/api/order`)
+                .then((response) => response.json())
+                .then(resJsonOrder => {
+                    var tempOrder = []
+                    for (let index = 0; index < resJsonOrder.orders.length; index++) {
+                        if (resJsonOrder.orders[index].customer == customer._id) tempOrder.push(resJsonOrder.orders[index])
+                    }
+                    setOrder(tempOrder)
+                })
+        }
+    }, [customer])
 
 
     return <AppContext.Provider value={{
@@ -59,7 +84,9 @@ export const AppProvider = ({ children }) => {
         bag, setBag,
         subTotal, setSubTotal,
         nikeSide, sportSide,
-        customer, setCustomer
+        customer, setCustomer,
+        jordan, nike, sport,
+        order
     }}>
         {children}
     </AppContext.Provider>

@@ -18,6 +18,10 @@ const ItemView = () => {
 
     const [textAlert, setTextAlert] = useState(false)
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
     // Get product (using useParams to get id in url)
     useEffect(() => {
         fetch('http://localhost:5000/api/product' + '/' + params.id)
@@ -166,7 +170,7 @@ const ItemView = () => {
                 }>
                     <p>Select Size</p>
                     <ul className="size-table">
-                        {product.sizes?.map((value, index) =>
+                        {product.sizes?.sort((a, b) => a.size - b.size).map((value, index) =>
                             <li
                                 key={index}
                                 onClick={choseSize}
