@@ -21,7 +21,7 @@ const OrderItem = ({ item, quantity }) => {
                             </PriceFormat>
                             VNĐ</p>
                     </div>
-                    <p>{item.product.type}</p>
+                    <p>{item.product.type.name}</p>
                     <div className="detail-content">
                         <p>Size: {item.size}</p>
                         <p>Quantity: {quantity.quantity}</p>

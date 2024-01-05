@@ -1,16 +1,13 @@
 import OrderedItem from "../Ordered/ordered-item";
 import '../user-comp.css'
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../../Context/AppContext";
 
-const Delivery = () => {
-    const { order } = useContext(AppContext)
+const Delivery = ({order}) => {
 
     return (
         <div className="container">
             <h1>DELIVERIED</h1>
             <div className="main">
-                {order.map((item, index) =>
+                {order.filter(o => o.deliveryStatus === 'delivered').sort((a, b) => b.id - a.id).map((item, index) =>
                     <OrderedItem
                         key={index}
                         item={item}

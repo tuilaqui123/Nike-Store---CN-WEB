@@ -1,5 +1,5 @@
 import './user.css'
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import avt from '../../asset/Images/avt.jpg'
 import Delivery from './user components/Deliveried/delivery';
 import Ordered from './user components/Ordered/ordered';
@@ -9,7 +9,22 @@ import { useNavigate } from 'react-router-dom'
 const User = () => {
 
     const navigate = useNavigate()
-    const { customer, setCustomer, order } = useContext(AppContext)
+    const { customer, setCustomer } = useContext(AppContext)
+    const [order, setOrder] = useState([]) //order
+    
+    useEffect(() => {
+        if (customer !== null) {
+            fetch(`http://localhost:5000/api/order`)
+                .then((response) => response.json())
+                .then(resJsonOrder => {
+                    var tempOrder = []
+                    for (let index = 0; index < resJsonOrder.orders.length; index++) {
+                        if (resJsonOrder.orders[index].customer == customer._id) tempOrder.push(resJsonOrder.orders[index])
+                    }
+                    setOrder(tempOrder)
+                })
+        }
+    }, [customer])
 
 
     const [isLoad, setIsLoad] = useState('Order')
@@ -42,7 +57,7 @@ const User = () => {
                     <li>
                         <img
                             className="avt"
-                            src={avt}
+                            src={customer?.avatar || '/avatar_placeholder.jpg'}
                             alt="avt"
                         />
                     </li>
@@ -58,10 +73,10 @@ const User = () => {
             </div>
             <div className="user-main">
                 {isLoad === 'Order' && (
-                    <Ordered />
+                    <Ordered order={order}/>
                 )}
                 {isLoad === 'Deliveried' && (
-                    <Delivery />
+                    <Delivery order={order}/>
                 )}
             </div>
         </div>

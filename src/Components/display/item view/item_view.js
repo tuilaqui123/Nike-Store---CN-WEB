@@ -3,6 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import clsx from 'clsx';
 import { AppContext } from '../../../Context/AppContext';
 import { useParams } from 'react-router-dom'
+import {toast} from 'react-toastify'
 import PriceFormat from '../../../Context/PriceFormat';
 
 
@@ -96,6 +97,7 @@ const ItemView = () => {
             } else {
                 // If the item doesn't exist, add it to the cart
                 setCart([...cart, temp]);
+                toast.success('Product added to cart')
             }
         }
     }

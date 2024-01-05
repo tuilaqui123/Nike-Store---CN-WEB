@@ -11,6 +11,11 @@ const validationSchema = Yup.object({
     phone: Yup.string().required('Please enter phone number!')
         .matches(/^[\+|0]([0-9]{9,14})\b/, 'Phone number is not correct!'),
     password: Yup.string().required('Please enter password!'),
+    name: Yup.string().required('Please enter name!'),
+    address: Yup.string().required('Please enter address!'),
+    confirmPassword: Yup.string()
+        .required('Please enter confirm password!')
+        .oneOf([Yup.ref('password'), null], 'Confirm password incorrect!')
 });
 
 const SignUp = () => {
@@ -21,7 +26,10 @@ const SignUp = () => {
     const form = useFormik({
         initialValues: {
             phone: '',
+            name: '',
+            address: '',
             password: '',
+            confirmPassword: '',
         },
         validationSchema,
         onSubmit: handleFormsubmit,
@@ -31,7 +39,7 @@ const SignUp = () => {
 
     function handleFormsubmit(values) {
         setLoading(true);
-        fetch('http://localhost:5000/api/customer/login', {
+        fetch('http://localhost:5000/api/customer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,15 +49,15 @@ const SignUp = () => {
             .then((res) => res.json())
             .then((resJson) => {
                 if (resJson.success) {
-                    toast.success('Login successed')
+                    toast.success('Signup successfully')
                     setCustomer(resJson.customer)
                     navigate('/');
                 } else {
-                    toast.error("Login successed")
+                    toast.error("Signup failed")
                 }
             })
             .catch(() => {
-                toast.error("Login failed")
+                toast.error("Signup failed")
             })
             .finally(() => {
                 setLoading(false);
@@ -80,10 +88,54 @@ const SignUp = () => {
                     </div>
                     <span
                         className={clsx('error-message', {
-                            'show': form.errors.username,
+                            'show': form.errors.phone,
                         })}
                     >
                         {form.errors.phone || ''}
+                    </span>
+                </div>
+                <div className="input-box">
+                    <div className='box'>
+                        <p>Name:</p>
+                        <input type="text"
+                            className={clsx({
+                                'invalid': form.errors.name
+                            })}
+                            placeholder="Name"
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            value={form.values.name}
+                            name='name' />
+                    </div>
+                    <span
+                        className={clsx('error-message', {
+                            'show': form.errors.name,
+
+                        })}
+                    >
+                        {form.errors.name || ''}
+                    </span>
+                </div>
+                <div className="input-box">
+                    <div className='box'>
+                        <p>Address:</p>
+                        <input type="text"
+                            className={clsx({
+                                'invalid': form.errors.address
+                            })}
+                            placeholder="Address"
+                            onChange={form.handleChange}
+                            onBlur={form.handleBlur}
+                            value={form.values.address}
+                            name='address' />
+                    </div>
+                    <span
+                        className={clsx('error-message', {
+                            'show': form.errors.address,
+
+                        })}
+                    >
+                        {form.errors.address || ''}
                     </span>
                 </div>
                 <div className="input-box">
@@ -113,21 +165,21 @@ const SignUp = () => {
                         <p>Confirm password:</p>
                         <input type="password"
                             className={clsx({
-                                'invalid': form.errors.password
+                                'invalid': form.errors.confirmPassword
                             })}
                             placeholder="Confirm password"
                             onChange={form.handleChange}
                             onBlur={form.handleBlur}
-                            value={form.values.password}
-                            name='password' />
+                            value={form.values.confirmPassword}
+                            name='confirmPassword' />
                     </div>
                     <span
                         className={clsx('error-message', {
-                            'show': form.errors.password,
+                            'show': form.errors.confirmPassword,
 
                         })}
                     >
-                        {form.errors.password || ''}
+                        {form.errors.confirmPassword || ''}
                     </span>
                 </div>
             </div>
