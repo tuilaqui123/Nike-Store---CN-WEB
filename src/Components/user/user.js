@@ -51,7 +51,7 @@ const User = () => {
                     </li>
                 </ul>
                 <ul className="user-button">
-                    <li onClick={chose}><p>Order</p></li>
+                    <li onClick={chose} className="chose"><p>Order</p></li>
                     <li onClick={chose}><p>Deliveried</p></li>
                     <li onClick={LogOut}><p>Log out</p></li>
                 </ul>
