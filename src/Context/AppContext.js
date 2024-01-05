@@ -9,7 +9,6 @@ export const AppProvider = ({ children }) => {
     const [jordan, setJordan] = useState([]) //jordan shoes
     const [nike, setNike] = useState([]) //nike shoes
     const [sport, setSport] = useState([]) //sport shoes
-    const [order, setOrder] = useState([]) //order
     const [cart, setCart] = useState([]) //cart
     const [bag, setBag] = useState([]) //bag (get item to checkout)
     const [subTotal, setSubTotal] = useState(0) //bag total
@@ -62,20 +61,6 @@ export const AppProvider = ({ children }) => {
 
     }, [])
 
-    useEffect(() => {
-        if (customer !== null) {
-            fetch(`http://localhost:5000/api/order`)
-                .then((response) => response.json())
-                .then(resJsonOrder => {
-                    var tempOrder = []
-                    for (let index = 0; index < resJsonOrder.orders.length; index++) {
-                        if (resJsonOrder.orders[index].customer == customer._id) tempOrder.push(resJsonOrder.orders[index])
-                    }
-                    setOrder(tempOrder)
-                })
-        }
-    }, [customer])
-
 
     return <AppContext.Provider value={{
         productTypes,
@@ -86,7 +71,6 @@ export const AppProvider = ({ children }) => {
         nikeSide, sportSide,
         customer, setCustomer,
         jordan, nike, sport,
-        order
     }}>
         {children}
     </AppContext.Provider>

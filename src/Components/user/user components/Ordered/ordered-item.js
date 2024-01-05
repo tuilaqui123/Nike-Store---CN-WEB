@@ -27,7 +27,7 @@ const OrderedItem = ({ item }) => {
                 <p><b>Payment:</b> {item.paymentStatus}</p>
                 <p>
                     <b>Total: </b>
-                    <PriceFormat>{item?.totalPrice}</PriceFormat>
+                    <PriceFormat>{item?.intoMoney}</PriceFormat>
                     VNĐ
                 </p>
                 <p><b>Phone:</b> {item?.phone}</p>
