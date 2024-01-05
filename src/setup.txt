@@ -1,22 +1,5 @@
 font-family: "Oswald", sans-serif;
 
-
-^
-- bug: khi xoá 1 item trong cart thì checkbox sẽ bị dồn lại, ví dụ 2 item, check item 1, xoá item 1 thì item 2 sẽ
-bị dồn lên và check
-- đổi mật khẩu ?
-- tạo bằng hệ thống, mk auto = tài khoản
-
-*
-- responsive !
-- sort !
 - check confirm password !
-- finish home page!
-- fix navbar design !
-- order user
-
-
-?
-- yeu thich 
 
 
