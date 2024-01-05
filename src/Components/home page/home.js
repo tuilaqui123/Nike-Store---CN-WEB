@@ -67,7 +67,7 @@ function Home() {
         }
         setIconic(tempIconic)
 
-    }, [])
+    }, [sport, sportSide, nike, nikeSide])
 
     return (
         <div className="home-container">
