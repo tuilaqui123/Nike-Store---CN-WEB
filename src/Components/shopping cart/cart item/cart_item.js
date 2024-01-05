@@ -52,10 +52,7 @@ const CartItem = ({ index, item, size, quantity, isCheck, Delete }) => {
                         <p>Quantity: {quantity}</p>
                     </div>
                 </div>
-                <div className="detail-button">
-                    <FontAwesomeIcon icon={faHeart} className="detail-icon" />
-                    <FontAwesomeIcon icon={faTrash} className="detail-icon" onClick={handleDelete} />
-                </div>
+
             </div>
         </div>
     );

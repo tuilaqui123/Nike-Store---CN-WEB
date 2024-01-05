@@ -1,25 +1,30 @@
 import './order-item.css'
 import img_shoe from '../../../../asset/Images/img-shoe.jpg'
+import PriceFormat from '../../../../Context/PriceFormat';
 
-const OrderItem = ({ item }) => {
+const OrderItem = ({ item, quantity }) => {
     console.log(item)
     return (
         <div className="cart-item-container">
             <img
                 className="item-img"
-                src={img_shoe}
+                src={item.product.images[0]}
                 alt="shoe"
             />
             <div className="cart-item-detail">
                 <div className="detail">
                     <div className="detail-header">
-                        <p>Nike Retro Dunk Low</p>
-                        <p>3,000,000 VNĐ</p>
+                        <p>{item.product.name}</p>
+                        <p>
+                            <PriceFormat>
+                                {item.product.price}
+                            </PriceFormat>
+                            VNĐ</p>
                     </div>
-                    <p>Basketball</p>
+                    <p>{item.product.type}</p>
                     <div className="detail-content">
-                        <p>Size: 42</p>
-                        <p>Quantity: 1</p>
+                        <p>Size: {item.size}</p>
+                        <p>Quantity: {quantity.quantity}</p>
                     </div>
                 </div>
             </div>

@@ -12,7 +12,7 @@ function SeasonContent({ videoUrl, tilte, content, link }) {
     }
 
     return (
-        <div className="season-content" onClick={handleClick}>
+        <div className="season-content">
             <ReactPlayer
                 className="video"
                 width="90%"
@@ -25,7 +25,7 @@ function SeasonContent({ videoUrl, tilte, content, link }) {
             />
             <h1>{tilte}</h1>
             <p>{content}</p>
-            <button className="shop-button">
+            <button className="shop-button" onClick={handleClick}>
                 <p>Shop</p>
             </button>
         </div>

@@ -43,29 +43,10 @@
     .detail-content {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
       width: 30%;
       p {
         font-weight: 300;
-      }
-      @media screen and (max-width: 750px) {
-        flex-direction: column;
-        width: 100%;
-      }
-    }
-    .detail-button {
-      justify-self: end;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 15%;
-      padding-bottom: 20px;
-      .detail-icon {
-        font-size: 20px;
-        cursor: pointer;
-      }
-      @media screen and (max-width: 750px) {
-        width: 30%;
+        margin-right: 40px;
       }
     }
   }

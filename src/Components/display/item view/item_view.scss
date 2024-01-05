@@ -3,8 +3,9 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding-bottom: 100px;
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 1160px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -15,7 +16,10 @@
     flex-direction: row;
     justify-content: space-evenly;
     padding-top: 20px;
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1160px) {
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
       width: 80%;
     }
     .image-side {
@@ -23,6 +27,12 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      @media screen and (max-width: 1160px) {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 75%;
+      }
       .img-side {
         border: 1px solid #e5e5e5;
         cursor: pointer;
@@ -30,6 +40,10 @@
         width: 80px;
         margin-bottom: 10px;
         transition: 0.2s;
+        @media screen and (max-width: 1160px) {
+          margin: 0px 10px;
+          margin-top: 20px;
+        }
         &:hover {
           border: 1px solid #111;
         }
@@ -38,10 +52,19 @@
     .image-main {
       width: 75%;
       cursor: pointer;
+      @media screen and (max-width: 1160px) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       .img-main {
         border: 1px solid #e5e5e5;
         height: 700px;
         width: calc((700 * 4) / 5);
+        @media screen and (max-width: 1160px) {
+          height: 500px;
+          width: 400px;
+        }
       }
     }
   }
@@ -53,8 +76,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    @media screen and (max-width: 1000px) {
-      width: 80%;
+    @media screen and (max-width: 1250px) {
+      width: 35%;
+    }
+    @media screen and (max-width: 1160px) {
+      width: 90%;
     }
     p {
       margin: 0;

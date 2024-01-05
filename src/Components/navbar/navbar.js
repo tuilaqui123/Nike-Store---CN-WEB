@@ -2,8 +2,10 @@ import './navbar.css'
 import React, { useContext, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faHeart, faBagShopping, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faHeart, faBagShopping, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { AppContext } from '../../Context/AppContext';
+import logo from '../../asset/Images/logo.png'
+import jordan from '../../asset/Images/jordan.png'
 
 const Navbar = () => {
 
@@ -11,6 +13,7 @@ const Navbar = () => {
     const navigate = useNavigate()
 
     const [isHover, setIsHover] = useState(false)
+    const [bar, setBar] = useState(false)
     const [btnHover, setBtnHover] = useState('')
     const [message, setMessage] = useState('');
 
@@ -42,20 +45,35 @@ const Navbar = () => {
     function handleKeyDown(event) {
         if (event.key === 'Enter') {
             handleSearch()
+            if (bar) handleBar()
         }
     };
 
     function handleSearch() {
-        if (message !== '')
+        if (message !== '') {
             navigate(`/s/${message}`)
+            if (bar) handleBar()
+        }
     }
 
 
+    function handleBar() {
+        setBar(!bar)
+    }
+
+    function BarNavigate(link) {
+        handleBar()
+        navigate(`/d/${link}`)
+    }
 
     return (
         <div className="navbar-container">
             <div className="header" onMouseEnter={handleOutHover}>
-                <p>logo</p>
+                <img
+                    className="logo"
+                    src={jordan}
+                    alt='logo'
+                />
                 {!customer ?
                     <div className="login" >
                         <Link to="/SignUp" style={linkStyle}>
@@ -75,7 +93,11 @@ const Navbar = () => {
                 }
             </div>
             <div className="navbar">
-                <p>logo</p>
+                <img
+                    className="logo"
+                    src={logo}
+                    alt='logo'
+                />
                 <div className="nav-section">
                     <ul className="nav-selection">
                         <Link to="/Home" style={linkStyle}>
@@ -102,14 +124,13 @@ const Navbar = () => {
                         />
                     </div>
                     <div className="nav-other" onMouseEnter={handleOutHover}>
-                        <Link to="/Favourite">
-                            <FontAwesomeIcon icon={faHeart} className="heart-icon other-icon" />
-                        </Link>
+
                         <Link to="/Cart">
                             <FontAwesomeIcon icon={faBagShopping} className="bag-icon other-icon" />
                         </Link>
                     </div>
                 </div>
+                <FontAwesomeIcon icon={faBars} className='bar-icon' onClick={handleBar} />
             </div>
             {isHover && (
                 <ul className="navbar-hover"
@@ -137,6 +158,38 @@ const Navbar = () => {
                 </ul>
             )}
 
+            {bar && (
+
+                <ul className="navbar-bar">
+                    <li>
+                        <div className='bar-container'>
+                            <div className="nav-search-bar">
+                                <FontAwesomeIcon
+                                    icon={faMagnifyingGlass}
+                                    className="search-icon"
+                                    onClick={handleSearch}
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Search"
+                                    value={message}
+                                    onChange={handleChange}
+                                    onKeyDown={handleKeyDown}
+                                />
+                            </div>
+                            <div className="nav-other">
+
+                                <Link to="/Cart">
+                                    <FontAwesomeIcon icon={faBagShopping} className="bag-icon other-icon" onClick={handleBar} />
+                                </Link>
+                            </div>
+                        </div>
+                    </li>
+                    <li onClick={() => BarNavigate('jordan')}><p>Jordan to You</p></li>
+                    <li onClick={() => BarNavigate('nikes')}><p>Explore Nike</p></li>
+                    <li onClick={() => BarNavigate('sport')}><p>Shop by Sport</p></li>
+                </ul>
+            )}
         </div>
     );
 }

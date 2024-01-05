@@ -207,9 +207,7 @@ const ItemView = () => {
                     <button className="add-bag" onClick={AddToBag}>
                         <p>Add to Bag</p>
                     </button>
-                    <button className="add-fav">
-                        <p>Favourite</p>
-                    </button>
+
                 </div>
                 <div className="description">
                     <p>{product.description}</p>

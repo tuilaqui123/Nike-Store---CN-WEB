@@ -9,8 +9,10 @@ bị dồn lên và check
 
 *
 - responsive !
+- sort !
 - check confirm password !
-- finish home !
+- finish home page!
+- fix navbar design !
 - order user
 
 

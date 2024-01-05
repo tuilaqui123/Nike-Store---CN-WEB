@@ -33,6 +33,20 @@ const SlideContent = ({ title, item }) => {
                         clickable: true,
                     }}
                     navigation={true}
+                    breakpoints={{
+                        1050: {
+                            slidesPerView: 4,
+                        },
+                        800: {
+                            slidesPerView: 3,
+                        },
+                        650: {
+                            slidesPerView: 2,
+                        },
+                        500: {
+                            slidesPerView: 2,
+                        }
+                    }}
                     modules={[Pagination, Navigation]}
                     autoplay={{
                         delay: 3000,

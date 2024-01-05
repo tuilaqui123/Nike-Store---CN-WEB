@@ -10,6 +10,11 @@
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5);
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   .order-info {
     width: 22%;
     height: 400px;
@@ -22,6 +27,13 @@
     padding-left: 10px;
     padding-right: 5px;
     box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5);
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+      height: auto;
+      width: 100%;
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
     p {
       font-size: 20px;
       font-weight: 300;
@@ -42,6 +54,12 @@
     padding-left: 10px;
     padding-top: 10px;
     border-radius: 5px;
+    box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.5);
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+      margin-right: 0px;
+      margin-bottom: 20px;
+    }
   }
 }
 
