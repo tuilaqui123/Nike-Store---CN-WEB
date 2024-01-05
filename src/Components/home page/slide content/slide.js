@@ -56,12 +56,12 @@ const SlideContent = ({ title, item }) => {
                 >
                     {item?.map((value, index) =>
                         <SwiperSlide key={index}>
-                            <Link to={`/i/${value.id}/${value.name}`} style={linkStyle} >
+                            <Link to={`/i/${value?.id}/${value?.name}`} style={linkStyle} >
                                 <Item
-                                    name={value.name}
-                                    types={value.type.name}
-                                    price={value.price}
-                                    image={value.images[0]}
+                                    name={value?.name}
+                                    types={value?.type.name}
+                                    price={value?.price}
+                                    image={value?.images[0]}
                                 />
                             </Link>
                         </SwiperSlide>
