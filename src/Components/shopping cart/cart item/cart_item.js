@@ -4,23 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 import PriceFormat from '../../../Context/PriceFormat';
 
-const CartItem = ({ index, item, size, quantity, isCheck, Delete }) => {
+const CartItem = ({ item, size, quantity, isSelected, onSelect, onDelete }) => {
 
-    const [checked, setChecked] = useState(false);
-
-    const handleChange = () => {
-        if (checked) {
-            setChecked(false)
-            isCheck(index, false)
+    function handleSelectChange(e) {
+        if (e.target.checked) {
+            onSelect(true);
+        } else {
+            onSelect(false);
         }
-        else {
-            setChecked(true)
-            isCheck(index, true)
-        }
-    }
-
-    function handleDelete() {
-        Delete(index)
     }
 
     return (
@@ -43,8 +34,8 @@ const CartItem = ({ index, item, size, quantity, isCheck, Delete }) => {
                     <div className="detail-mid">
                         <p>{item.type}</p>
                         <input type="checkbox"
-                            checked={checked}
-                            onChange={handleChange}
+                            checked={isSelected}
+                            onChange={handleSelectChange}
                         />
                     </div>
                     <div className="detail-content">
@@ -54,7 +45,7 @@ const CartItem = ({ index, item, size, quantity, isCheck, Delete }) => {
                 </div>
                 <div className="detail-button">
                     <FontAwesomeIcon icon={faHeart} className="detail-icon" />
-                    <FontAwesomeIcon icon={faTrash} className="detail-icon" onClick={handleDelete} />
+                    <FontAwesomeIcon icon={faTrash} className="detail-icon" onClick={() => onDelete()} />
                 </div>
             </div>
         </div>

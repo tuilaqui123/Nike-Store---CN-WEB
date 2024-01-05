@@ -10,51 +10,51 @@ const Cart = () => {
     const navigate = useNavigate()
     const { cart, setCart, bag, setBag, subTotal, setSubTotal } = useContext(AppContext)
 
-    const [isSelect, setIsSelect] = useState(false)
+    const [seletedCartItems, setSeletedCartItems] = useState([])
+    const [isCheckoutClicked, setIsCheckoutClicked] = useState(false)
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
-        setBag([])
-        setSubTotal(0)
-    }, [])
+        setBag(seletedCartItems)
+        setSubTotal(seletedCartItems.reduce((prev, curr) => prev + curr.item.price, 0))
+        setIsCheckoutClicked(false)
+    }, [seletedCartItems])
 
-    function isCheck(index, checked) {
+    
+    function handleSelect(cartItem, checked) {
         if (checked) {
-            setBag([...bag, cart[index]])
-            var temp = subTotal + cart[index].item.price
-            setSubTotal(temp)
+            setSeletedCartItems(prev => [...prev, cartItem])
+        } else {
+            setSeletedCartItems(prev => prev.filter(_cartItem => _cartItem.productSize._id !== cartItem.productSize._id))
         }
-        else {
-            setBag(bag.filter(item => item !== cart[index]))
-            var temp = subTotal - cart[index].item.price
-            setSubTotal(temp)
+    }
+    
+    function isSelected(cartItem) {
+        const item = seletedCartItems.find((_cartItem) => _cartItem.productSize._id === cartItem.productSize._id)
+        if (item) {
+            return true
         }
+        return false
+    }
+    
+    function handleDelete() {
+        setCart(prev => prev.filter(_cartItem => !seletedCartItems.includes(_cartItem)))
+        setSeletedCartItems([])
+    }
+
+    function handleDeleteOne(cartItem) {
+        setCart(prev => prev.filter(_cartItem => _cartItem.productSize._id !== cartItem.productSize._id))
+        setSeletedCartItems(prev => prev.filter(_cartItem => _cartItem.productSize._id !== cartItem.productSize._id))
     }
 
     function GotoCheckout() {
+        setIsCheckoutClicked(true)
         if (subTotal !== 0) {
-            setIsSelect(false)
             navigate("/Checkout")
         }
-        else setIsSelect(true)
-    }
-
-    function handleDelete() {
-        bag.forEach(item => {
-            let index = cart.indexOf(item);
-            if (index !== -1) {
-                cart.splice(index, 1);
-            }
-        });
-        setBag([])
-        setSubTotal(0)
-    }
-
-    function Delete(deleteIndex) {
-        setCart(prevCart => prevCart.filter((_, index) => index !== deleteIndex));
     }
 
     return (
@@ -69,13 +69,13 @@ const Cart = () => {
                 <div className="cart-main">
                     {cart.map((value, index) =>
                         <CartItem
-                            key={index}
-                            index={index}
+                            key={value.productSize._id}
                             item={value.item}
                             size={value.size}
                             quantity={value.quantity}
-                            isCheck={isCheck}
-                            Delete={Delete}
+                            isSelected={isSelected(value)}
+                            onSelect={(checked) => handleSelect(value, checked)}
+                            onDelete={() => handleDeleteOne(value)}
                         />
                     )}
                 </div>
@@ -115,7 +115,7 @@ const Cart = () => {
                             )}
                         </div>
                     </div>
-                    {isSelect && (
+                    {seletedCartItems.length === 0 && isCheckoutClicked && (
                         <p className="alert-text">Please select at least one item.</p>
                     )}
                     <button className="summary-button" onClick={GotoCheckout}>
