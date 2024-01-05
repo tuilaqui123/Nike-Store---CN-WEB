@@ -114,7 +114,11 @@ const CheckOut = () => {
                     updateCart()
                     toast.success('Đặt hàng thành công');
                     setValidateOnChange(false);
-                    navigate('/User');
+                    if (customer) {
+                        navigate('/User');
+                    } else {
+                        navigate('/');
+                    }
                 } else {
                     toast.error('Có lỗi xảy ra');
                 }

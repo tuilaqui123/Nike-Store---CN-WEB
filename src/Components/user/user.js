@@ -42,7 +42,7 @@ const User = () => {
                     <li>
                         <img
                             className="avt"
-                            src={avt}
+                            src={customer?.avatar || '/avatar_placeholder.jpg'}
                             alt="avt"
                         />
                     </li>
