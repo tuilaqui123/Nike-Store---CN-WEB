@@ -1,0 +1,23 @@
+.wrapper {
+    text-align: left;
+    margin-right: 300px;
+}
+.wrapper div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 20px;
+}
+p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p a {
+    color: blue;
+}
+p img {
+    width: 70%;
+    height: 70%;
+    margin: 0 auto;
+}
