@@ -45,15 +45,15 @@ const ItemDisplay = () => {
 
     function choseType(event) {
         const liText = event.currentTarget.querySelector('p').textContent
-        if (params.id === 'Explore Nike') navigate(`/d/nikes/${liText}`)
-        if (params.id === 'sport') navigate(`/d/sport/${liText}`)
+        if (params.id === 'Explore Nike') navigate(`/giay/nikes/${liText}`)
+        if (params.id === 'sport') navigate(`/giay/sport/${liText}`)
         if (params.id === 'jordan') {
             if (liText === 'Low Top')
-                navigate(`/d/jordan/Low`)
+                navigate(`/giay/jordan/Low`)
             if (liText === 'Mid Top')
-                navigate(`/d/jordan/Mid`)
+                navigate(`/giay/jordan/Mid`)
             if (liText === 'High Top')
-                navigate(`/d/jordan/High`)
+                navigate(`/giay/jordan/High`)
         }
 
     }
@@ -62,14 +62,7 @@ const ItemDisplay = () => {
         <div className="display-container">
             <div className="display-header">
                 <div className="display-title">
-                    {params.cate ? (
-                        <>
-                            <h3>{params.id.toUpperCase() + ' / '}</h3>
-                            <p> {params.cate.toUpperCase()}</p>
-                        </>
-                    ) : (
-                        <h3>{params.id.toUpperCase()}</h3>
-                    )}
+                    <h3>{params.id.toUpperCase()}</h3>
                 </div>
                 <div className="button-container">
                     <div className="button-header res-side" onClick={showFilter}>

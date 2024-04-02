@@ -25,8 +25,8 @@ const DisplaySide = ({ tag }) => {
                 p.style = {}; // Reset styles for all p elements
             });
 
-            if (tag === 'Explore Nike') navigate(`/d/nikes`)
-            else navigate(`/d/${params.id}`)
+            if (tag === 'Explore Nike') navigate(`/giay/nikes`)
+            else navigate(`/giay/${params.id}`)
         }
         else {
 
@@ -42,15 +42,15 @@ const DisplaySide = ({ tag }) => {
             // Apply styles directly to the p element
             Object.assign(liBtn.style, linkSide);
 
-            if (tag === 'Explore Nike') navigate(`/d/nikes/${liText}`)
-            if (tag === 'sport') navigate(`/d/sport/${liText}`)
+            if (tag === 'Explore Nike') navigate(`/giay/nikes/${liText}`)
+            if (tag === 'sport') navigate(`/giay/sport/${liText}`)
             if (tag === 'jordan') {
                 if (liText === 'Low Top')
-                    navigate(`/d/jordan/Low`)
+                    navigate(`/giay/jordan/Low`)
                 if (liText === 'Mid Top')
-                    navigate(`/d/jordan/Mid`)
+                    navigate(`/giay/jordan/Mid`)
                 if (liText === 'High Top')
-                    navigate(`/d/jordan/High`)
+                    navigate(`/giay/jordan/High`)
             }
         }
     }

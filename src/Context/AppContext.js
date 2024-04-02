@@ -16,7 +16,7 @@ export const AppProvider = ({ children }) => {
 
     const [sportSide, setSportSide] = useState([]) //sport types
     const [nikeSide, setNikeSide] = useState([]) // nike types
-
+    const [newInfo, setNewInfo] = useState([])
 
     useEffect(() => {
         //Get product type 
@@ -71,6 +71,7 @@ export const AppProvider = ({ children }) => {
         nikeSide, sportSide,
         customer, setCustomer,
         jordan, nike, sport,
+        newInfo, setNewInfo
     }}>
         {children}
     </AppContext.Provider>

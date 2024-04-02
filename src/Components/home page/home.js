@@ -7,6 +7,7 @@ import nike_clothing from '../../asset/Video/nike_clothing.mp4'
 import SeasonContent from './season content/season';
 import SlideContent from './slide content/slide';
 import { AppContext } from '../../Context/AppContext';
+import News from '../News/News';
 
 function Home() {
 
@@ -76,7 +77,7 @@ function Home() {
                 videoUrl={nike_40yrs}
                 tilte={"Air Force 1"}
                 content={"Join Forces: Celebrating 40 Years of Force"}
-                link={'/d/nikes/%20Air%20Force'}
+                link={'/giay/nikes/%20Air%20Force'}
             />
 
             <SlideContent
@@ -88,7 +89,7 @@ function Home() {
                 videoUrl={nike_clothing}
                 tilte={"Believe In More"}
                 content={"Be yourself and show the world your personality"}
-                link={'/d/jordan'}
+                link={'/giay/jordan'}
             />
 
             <SlideContent
@@ -100,9 +101,9 @@ function Home() {
                 videoUrl={nike_sport}
                 tilte={"Find Your Passion"}
                 content={"Let's Nike go with you on your jouney"}
-                link={'/d/sport'}
+                link={'/giay/sport'}
             />
-
+            <News />
         </div>
     );
 }

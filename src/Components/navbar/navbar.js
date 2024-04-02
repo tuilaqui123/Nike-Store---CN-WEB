@@ -4,7 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faHeart, faBagShopping, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { AppContext } from '../../Context/AppContext';
-import logo from '../../asset/Images/logo.png'
+import golo from '../../asset/Images/golo.jpg'
+import blueribbon from '../../asset/Images/blueribbon2.jpg'
 import jordan from '../../asset/Images/jordan.png'
 
 const Navbar = () => {
@@ -51,7 +52,7 @@ const Navbar = () => {
 
     function handleSearch() {
         if (message !== '') {
-            navigate(`/s/${message}`)
+            navigate(`/tim-kiem/${message}`)
             if (bar) handleBar()
         }
     }
@@ -63,28 +64,23 @@ const Navbar = () => {
 
     function BarNavigate(link) {
         handleBar()
-        navigate(`/d/${link}`)
+        navigate(`/giay/${link}`)
     }
 
     return (
         <div className="navbar-container">
             <div className="header" onMouseEnter={handleOutHover}>
-                <img
-                    className="logo"
-                    src={jordan}
-                    alt='logo'
-                />
                 {!customer ?
                     <div className="login" >
-                        <Link to="/SignUp" style={linkStyle}>
-                            <p>Sign Up</p>
+                        <Link to="/dang-ky" style={linkStyle}>
+                            <p>Đăng ký</p>
                         </Link>
                         <p>|</p>
-                        <Link to="/SignIn" style={linkStyle}>
-                            <p>Sign In</p>
+                        <Link to="/dang-nhap" style={linkStyle}>
+                            <p>Đăng nhập</p>
                         </Link>
                     </div> :
-                    <Link to="/User" style={linkStyle}>
+                    <Link to="/tai-khoan" style={linkStyle}>
                         <div className="is-login">
                             <p>{'Hi, ' + customer?.name}</p>
                             <FontAwesomeIcon icon={faUser} />
@@ -93,31 +89,36 @@ const Navbar = () => {
                 }
             </div>
             <div className="navbar">
-                <img
-                    className="logo"
-                    src={logo}
-                    alt='logo'
-                />
+                <div className='ok'>
+                    <img
+                        className="logo rounded-full"
+                        src={golo}
+                        alt='logo'
+                    />
+                </div>
                 <div className="nav-section">
                     <ul className="nav-selection">
-                        <Link to="/Home" style={linkStyle}>
-                            <li>Home</li>
+                        <Link to="/trang-chu" style={linkStyle}>
+                            <li>Trang chủ</li>
                         </Link>
-                        <Link to="/d/jordan" style={linkStyle}>
-                            <li onMouseEnter={handleOutHover}>Jordan to You</li>
+                        <Link to="/giay/jordan" style={linkStyle}>
+                            <li onMouseEnter={handleOutHover}>Jordan</li>
                         </Link>
-                        <Link to="/d/nikes" style={linkStyle}>
-                            <li onMouseEnter={handleOnHover} >Explore Nike</li>
+                        <Link to="/giay/nikes" style={linkStyle}>
+                            <li onMouseEnter={handleOnHover} >Khám phá NIKE</li>
                         </Link>
-                        <Link to="/d/sport" style={linkStyle}>
-                            <li onMouseEnter={handleOnHover} >Shop by Sport</li>
+                        <Link to="/giay/sport" style={linkStyle}>
+                            <li onMouseEnter={handleOnHover} >Thể thao</li>
+                        </Link>
+                        <Link to="/shop-giay-secondhand-blue-ribbon" style={linkStyle}>
+                            <li>Giới thiệu</li>
                         </Link>
                     </ul>
                     <div className="nav-search" onMouseEnter={handleOutHover}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} className="search-icon" onClick={handleSearch} />
                         <input
                             type="text"
-                            placeholder="Search"
+                            placeholder="Tìm kiếm"
                             value={message}
                             onChange={handleChange}
                             onKeyDown={handleKeyDown}
@@ -125,7 +126,7 @@ const Navbar = () => {
                     </div>
                     <div className="nav-other" onMouseEnter={handleOutHover}>
 
-                        <Link to="/Cart">
+                        <Link to="/gio-hang">
                             <FontAwesomeIcon icon={faBagShopping} className="bag-icon other-icon" />
                         </Link>
                     </div>
@@ -136,7 +137,7 @@ const Navbar = () => {
                 <ul className="navbar-hover"
                     onMouseLeave={handleOutHover}
                 >
-                    {btnHover === 'Explore Nike' && (
+                    {btnHover === 'Khám phá NIKE' && (
                         <>
                             {nikeSide.map((value, index) => (
                                 <li key={index} onClick={choseType}>
@@ -146,7 +147,7 @@ const Navbar = () => {
                         </>
                     )}
 
-                    {btnHover === 'Shop by Sport' && (
+                    {btnHover === 'Thể thao' && (
                         <>
                             {sportSide.map((value, index) => (
                                 <li key={index} onClick={choseType}>
@@ -171,7 +172,7 @@ const Navbar = () => {
                                 />
                                 <input
                                     type="text"
-                                    placeholder="Search"
+                                    placeholder="Tìm kiếm"
                                     value={message}
                                     onChange={handleChange}
                                     onKeyDown={handleKeyDown}
@@ -179,15 +180,15 @@ const Navbar = () => {
                             </div>
                             <div className="nav-other">
 
-                                <Link to="/Cart">
+                                <Link to="/gio-hang">
                                     <FontAwesomeIcon icon={faBagShopping} className="bag-icon other-icon" onClick={handleBar} />
                                 </Link>
                             </div>
                         </div>
                     </li>
-                    <li onClick={() => BarNavigate('jordan')}><p>Jordan to You</p></li>
-                    <li onClick={() => BarNavigate('nikes')}><p>Explore Nike</p></li>
-                    <li onClick={() => BarNavigate('sport')}><p>Shop by Sport</p></li>
+                    <li onClick={() => BarNavigate('jordan')}><p>Jordan</p></li>
+                    <li onClick={() => BarNavigate('nikes')}><p>Khám phá NIKE</p></li>
+                    <li onClick={() => BarNavigate('sport')}><p>Thế thao</p></li>
                 </ul>
             )}
         </div>

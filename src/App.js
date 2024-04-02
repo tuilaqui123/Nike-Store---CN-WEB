@@ -16,6 +16,8 @@ import User from './Components/user/user';
 import { AppProvider } from './Context/AppContext';
 import 'react-toastify/dist/ReactToastify.css';
 import SearchDisplay from './Components/display/searchDisplay';
+import NewsDisplay from './Components/News/NewDisplay';
+import GioiThieu from './Components/News/NewContent/Introduce/gioithieu';
 
 function App() {
   return (
@@ -26,17 +28,19 @@ function App() {
           <Routes>
             <Route>
               <Route path="/" element={<Home />} />
+              <Route path="/trang-chu" element={<Home />} />
               <Route path="i/:id/:name" element={<ItemView />} />
-              <Route path="d/:id" element={<ItemDisplay />} />
-              <Route path="d/:id/:cate" element={<ItemDisplay />} />
-              <Route path="s/:content" element={<SearchDisplay />} />
-              <Route path="Checkout" element={<CheckOut />} />
-              <Route path="User" element={<User />} />
-              <Route path="Cart" element={<Cart />} />
-              <Route path="Home" element={<Home />} />
-              <Route path="Favourite" element={<Favourite />} />
-              <Route path="SignIn" element={<SignIn />} />
-              <Route path="SignUp" element={<SignUp />} />
+              <Route path="/giay/:id" element={<ItemDisplay />} />
+              <Route path="/giay/:id/:cate" element={<ItemDisplay />} />
+              <Route path="/tim-kiem/:content" element={<SearchDisplay />} />
+              <Route path="/thanh-toan" element={<CheckOut />} />
+              <Route path="/tai-khoan" element={<User />} />
+              <Route path="/shop-giay-secondhand-blue-ribbon" element={<GioiThieu />} />
+              <Route path="/gio-hang" element={<Cart />} />
+              <Route path="/yeu-thich" element={<Favourite />} />
+              <Route path="/dang-nhap" element={<SignIn />} />
+              <Route path="/dang-ky" element={<SignUp />} />
+              <Route path="tin-tuc/:id" element={<NewsDisplay />} />
             </Route>
           </Routes>
           <Footer />

@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import clsx from 'clsx';
 import { AppContext } from '../../../Context/AppContext';
 import { useParams } from 'react-router-dom'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import PriceFormat from '../../../Context/PriceFormat';
 
 
@@ -130,90 +130,98 @@ const ItemView = () => {
 
 
     return (
-        <div className="itemview-container">
-            <div className="image-container">
-                <div className="image-side">
-                    {product.images?.map((image, index) => (
-                        <img
-                            key={index}
-                            className="img-side"
-                            src={image}
-                            alt="side image"
-                            onClick={changeMainImage}
-                        />
-                    ))}
-                </div>
-                <div className="image-main">
-                    <img
-                        className="img-main"
-                        src={mainImg}
-                        alt="side image"
-                    />
-                </div>
-            </div>
-            <div className="detail-container">
-                <div className="detail-content">
-                    <p className="item-name">{product.name}</p>
-                    <p className="item-category">{product.type?.name}</p>
-                    <p className="item-price">
-                        <PriceFormat>
-                            {product.price}
-                        </PriceFormat>
-                        VNĐ</p>
-                </div>
-                <div className={
-                    clsx(
-                        'detail-size',
-                        {
-                            'alert-size': textAlert,
-                        }
-                    )
-
-                }>
-                    <p>Select Size</p>
-                    <ul className="size-table">
-                        {product.sizes?.sort((a, b) => a.size - b.size).map((value, index) =>
-                            <li
+        <div className="itemview-container-main">
+            <div className="itemview-container">
+                <div className="image-container">
+                    <div className="image-side">
+                        {product.images?.map((image, index) => (
+                            <img
                                 key={index}
-                                onClick={choseSize}
-                                className=''
-                            >
-                                <p>{value.size}</p>
-                            </li>
-                        )}
-                    </ul>
-                    {textAlert && (
-                        <p>Please select a size.</p>
-                    )}
-                </div>
-                <div className='detail-quantity'>
-                    <p>Select Quantity</p>
-                    <div className='quantity-selector'>
-                        <button onClick={decQuantity}>
-                            <p>-</p>
-                        </button>
-                        <input
-                            type='text'
-                            value={quantity}
-                            onChange={handleInputChange}
-                            onFocus={() => setIsEditable(true)}
-                            onBlur={handleInputBlur}
-                            readOnly={!isEditable}
+                                className="img-side"
+                                src={image}
+                                alt="side image"
+                                onClick={changeMainImage}
+                            />
+                        ))}
+                    </div>
+                    <div className="image-main">
+                        <img
+                            className="img-main"
+                            src={mainImg}
+                            alt="side image"
                         />
-                        <button onClick={incQuantity}>
-                            <p>+</p>
-                        </button>
                     </div>
                 </div>
-                <div className="detail-button">
-                    <button className="add-bag" onClick={AddToBag}>
-                        <p>Add to Bag</p>
-                    </button>
+                <div className="detail-container">
+                    <div className="detail-content">
+                        <p className="item-name">{product.name}</p>
+                        <p className="item-category">{product.type?.name}</p>
+                        <p className="item-price">
+                            <PriceFormat>
+                                {product.price}
+                            </PriceFormat>
+                            VNĐ</p>
+                    </div>
+                    <div className={
+                        clsx(
+                            'detail-size',
+                            {
+                                'alert-size': textAlert,
+                            }
+                        )
 
+                    }>
+                        <p>Select Size</p>
+                        <ul className="size-table">
+                            {product.sizes?.sort((a, b) => a.size - b.size).map((value, index) =>
+                                <li
+                                    key={index}
+                                    onClick={choseSize}
+                                    className=''
+                                >
+                                    <p>{value.size}</p>
+                                </li>
+                            )}
+                        </ul>
+                        {textAlert && (
+                            <p>Please select a size.</p>
+                        )}
+                    </div>
+                    <div className='detail-quantity'>
+                        <p>Select Quantity</p>
+                        <div className='quantity-selector'>
+                            <button onClick={decQuantity}>
+                                <p>-</p>
+                            </button>
+                            <input
+                                type='text'
+                                value={quantity}
+                                onChange={handleInputChange}
+                                onFocus={() => setIsEditable(true)}
+                                onBlur={handleInputBlur}
+                                readOnly={!isEditable}
+                            />
+                            <button onClick={incQuantity}>
+                                <p>+</p>
+                            </button>
+                        </div>
+                    </div>
+                    <div className="detail-button">
+                        <button className="add-bag" onClick={AddToBag}>
+                            <p>Add to Bag</p>
+                        </button>
+
+                    </div>
                 </div>
-                <div className="description">
-                    <p>{product.description}</p>
+            </div>
+            <div className="description">
+                <div className='des-title'>
+                    <h2>[2hand] Giày Thể Thao Nam {product.name} - GIÀY CŨ CHÍNH HÃNG BLUE RIBBON</h2>
+                    <p>- Condition: 9.5/10.</p>
+                    <p>- Giá tiền của sản phẩm sẽ phụ thuộc vào độ mới của từng đôi</p>
+                    <p>Lưu ý: Các bạn trước khi đặt nên nhắn cho shop để xem ảnh chi tiết hoặc video đôi đó nhé, vì mỗi đôi giày secondhand sẽ có ngoại hình khác nhau.</p>
                 </div>
+                <p className="mt-5">{product.description}</p>
             </div>
         </div>
     );
