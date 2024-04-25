@@ -39,7 +39,7 @@ const SignUp = () => {
 
     function handleFormsubmit(values) {
         setLoading(true);
-        fetch('http://localhost:5000/api/customer', {
+        fetch('https://restapi.blueribbon.name.vn/api/customer', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const SignIn = () => {
 
     function handleFormsubmit(values) {
         setLoading(true);
-        fetch('http://localhost:5000/api/customer/login', {
+        fetch('https://restapi.blueribbon.name.vn/api/customer/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

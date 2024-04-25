@@ -20,7 +20,7 @@ export const AppProvider = ({ children }) => {
 
     useEffect(() => {
         //Get product type 
-        fetch(`http://localhost:5000/api/product-type`)
+        fetch(`https://restapi.blueribbon.name.vn/api/product-type`)
             .then((response) => response.json())
             .then(resJsonProductTypes => {
                 var tempNike = []
@@ -40,7 +40,7 @@ export const AppProvider = ({ children }) => {
             })
 
         //Get product 
-        fetch(`http://localhost:5000/api/product`)
+        fetch(`https://restapi.blueribbon.name.vn/api/product`)
             .then((response) => response.json())
             .then(resJsonProducts => {
                 var tempJordan = []

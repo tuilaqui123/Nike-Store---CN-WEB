@@ -25,7 +25,7 @@ const ItemView = () => {
 
     // Get product (using useParams to get id in url)
     useEffect(() => {
-        fetch('http://localhost:5000/api/product' + '/' + params.id)
+        fetch('https://restapi.blueribbon.name.vn/api/product' + '/' + params.id)
             .then((response) => response.json())
             .then(resJson => {
                 setProduct(resJson.product)

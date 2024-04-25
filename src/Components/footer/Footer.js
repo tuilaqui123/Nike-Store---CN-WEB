@@ -16,11 +16,12 @@ const Footer = () => {
                 <li>
                     <h3>About Us</h3>
                     <div className="about-content">
-                        <p>21520419 - Pham Ngoc Qui</p>
-                        <p>21520390 - Tran Nhut Phat</p>
-                        <p>20521123 - Bui Tong Minh Chau</p>
-                        <p>21520613 - Nguyen Hoang Quoc Bao</p>
-                        <p>19522036 - Nguyen Dinh Hoang Phuc</p>
+                        <p>21520419 - Phạm Ngọc Quí</p>
+                        <p>21520390 - Trần Nhựt Phát</p>
+                        <p>21521129 - Ngô Võ Quang Minh</p>
+                        <p>21520905 - Nguyễn Thị Thu Hương</p>
+                        <p>21522162 - Nguyễn Võ Hoàng Huy</p>
+                        <p>21522346 - Trần Tuấn Minh</p>
                     </div>
                 </li>
             </ul>

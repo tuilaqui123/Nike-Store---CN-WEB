@@ -14,7 +14,7 @@ const User = () => {
     
     useEffect(() => {
         if (customer !== null) {
-            fetch(`http://localhost:5000/api/order`)
+            fetch(`https://restapi.blueribbon.name.vn/api/order`)
                 .then((response) => response.json())
                 .then(resJsonOrder => {
                     var tempOrder = []

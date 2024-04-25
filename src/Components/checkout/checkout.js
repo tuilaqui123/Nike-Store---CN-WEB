@@ -52,7 +52,7 @@ const CheckOut = () => {
     useEffect(() => {
         if (customer) {
             form.setFieldValue('phone', customer.phone);
-            fetch('http://localhost:5000/api/coupon/get-by-customer/' + customer?._id)
+            fetch('https://restapi.blueribbon.name.vn//api/coupon/get-by-customer/' + customer?._id)
                 .then((res) => res.json())
                 .then((resJson) => {
                     if (resJson.success) {
@@ -88,7 +88,7 @@ const CheckOut = () => {
             quantity: b.quantity,
             price: b.item.price,
         }));
-        fetch('http://localhost:5000/api/order', {
+        fetch('https://restapi.blueribbon.name.vn/api/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

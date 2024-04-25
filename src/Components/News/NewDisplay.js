@@ -1,31 +1,19 @@
 import React, { useContext, useState, useEffect } from "react";
-import text from './NewContent/test/text.txt'
-import textimg from './NewContent/test/test.jpg'
+import '../blogPost/post.css';
+import Post from "../blogPost/post";
 import './news.css'
-import { AppContext } from "../../Context/AppContext";
+import { useLocation } from "react-router-dom";
 
 const NewsDisplay = () => {
-    const { newInfo } = useContext(AppContext)
-    const [content, setContent] = useState("")
-    console.log(newInfo)
-    fetch(require("" + newInfo.content))
-        .then(r => r.text())
-        .then(raw => {
-            setContent(raw)
-        });
+    const location = useLocation();
+    const { filename } = location.state;
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
     return (
         <div className="w-full pl-10 text-left mt-10 pb-20">
-            <h1 className="text-5xl font-black">{newInfo.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: content }} className="post" />
-            <img
-                src={require("./NewContent/" + newInfo.image)}
-                className="w-9/12"
-            />
+            <Post fileName={filename}/>            
         </div>
-
     );
 }
 

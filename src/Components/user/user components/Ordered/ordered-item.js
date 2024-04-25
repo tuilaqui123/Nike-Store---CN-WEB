@@ -9,7 +9,7 @@ const OrderedItem = ({ item }) => {
     const [orderItem, setOrderItem] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/api/order/` + item.id)
+        fetch(`https://restapi.blueribbon.name.vn/api/order/` + item.id)
             .then((response) => response.json())
             .then(resJsonOrderItem => {
                 setOrderItem(resJsonOrderItem.order.details)
